@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
-import { Box, Typography } from "@mui/material";
+import { Box, CircularProgress, Typography } from "@mui/material";
 import UseRefreshToken from "../../hooks/useRefreshToken";
 import useAuth from "../../hooks/useAuth";
 
@@ -26,15 +26,20 @@ const PersistLogin = () => {
     <>
       {isLoading ? (
         <Box
+          className="gradient-bg"
           sx={{
             display: "flex",
             width: "100%",
             height: "100vh",
             justifyContent: "center",
             alignItems: "center",
+            flexDirection: "column",
           }}
         >
-          <Typography variant="h1">Loading...</Typography>
+          <CircularProgress sx={{ color: "#FFF" }} />
+          <Typography mt={5} variant="h5" color="#FFF">
+            Loading Please wait...
+          </Typography>
         </Box>
       ) : (
         <Outlet />

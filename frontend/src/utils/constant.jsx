@@ -1,25 +1,55 @@
-import cow from "../assets/images/cow.png";
-import goat from "../assets/images/goat.png";
-import chicken from "../assets/images/chicken.png";
-import duck from "../assets/images/duck.png";
-import carabao from "../assets/images/carabao.png";
-import pig from "../assets/images/pig.png";
-import horse from "../assets/images/horse.png";
+import cow from "../assets/images/cow.gif";
+import goat from "../assets/images/goat.gif";
+import chicken from "../assets/images/chicken.gif";
+import duck from "../assets/images/duck.gif";
+import carabao from "../assets/images/carabao.gif";
+import pig from "../assets/images/pig.gif";
+import horse from "../assets/images/horse.gif";
 
-export const HEADER_HEIGHT = "80px";
-export const DRAWER_WIDTH_OPEN = 250;
-export const DRAWER_WIDTH_CLOSED = 60;
-// export const BASE_URL = "http://192.168.68.111:3500";
+import cowM from "../assets/images/cow-mortality.webp";
+import goatM from "../assets/images/goat-mortality.webp";
+import chickenM from "../assets/images/chicken-mortality.webp";
+import duckM from "../assets/images/duck-mortality.webp";
+import carabaoM from "../assets/images/carabao-mortality.webp";
+import pigM from "../assets/images/pig-mortality.webp";
+import horseM from "../assets/images/horse-mortality.webp";
+
+import logo from "../assets/images/logo.jpg";
+import { Avatar, Badge, Button, Stack, styled } from "@mui/material";
+import dayjs from "dayjs";
+import { getGridStringOperators } from "@mui/x-data-grid";
+
+// export const BASE_URL = "https://tiaong-livestock-backend.onrender.com";
 export const BASE_URL = "http://localhost:3500";
-// Role IDs following a pattern for different categories
-const ROLES_LIST = {
-  SuperAdmin: 1000, // Super Administrator
-  Admin: 1100, // Administrator
-  Office1: 2100, // Custom Office 1 (Management)
-  Office2: 2200, // Custom Office 2 (Management)
-  Office3: 2300, // Custom Office 3 (Management)
-  Cashier: 3100, // Cashier role (Operations)
-};
+
+const StyledBadge = styled(Badge)(({ theme }) => ({
+  "& .MuiBadge-badge": {
+    backgroundColor: "#44b700",
+    color: "#44b700",
+    boxShadow: `0 0 0 2px ${theme.palette.background.paper}`,
+    "&::after": {
+      position: "absolute",
+      top: -0.6,
+      left: -0.7,
+      width: "100%",
+      height: "100%",
+      borderRadius: "50%",
+      animation: "ripple 1.2s infinite ease-in-out",
+      border: "1px solid currentColor",
+      content: '""',
+    },
+    "@keyframes ripple": {
+      "0%": {
+        transform: "scale(.8)",
+        opacity: 1,
+      },
+      "100%": {
+        transform: "scale(2.4)",
+        opacity: 0,
+      },
+    },
+  },
+}));
 
 export const ALERT_SEV = {
   error: "error",
@@ -46,10 +76,6 @@ export const TIAONG_BRGY = [
   "Lusacan",
   "Paiisa",
   "Palagaran",
-  "Poblacion I",
-  "Poblacion II",
-  "Poblacion III",
-  "Poblacion IV",
   "Quipot",
   "San Agustin",
   "San Isidro",
@@ -80,10 +106,6 @@ export const BRGY_COOR = {
   Lusacan: { lat: 13.957300026085951, lng: 121.3448346365917 },
   Paiisa: { lat: 13.925901132091386, lng: 121.3502876152325 },
   Palagaran: { lat: 13.938441845689342, lng: 121.34450427792069 },
-  "Poblacion I": { lat: 13.9618, lng: 121.3198 },
-  "Poblacion II": { lat: 13.9643, lng: 121.3212 },
-  "Poblacion III": { lat: 13.9596, lng: 121.3227 },
-  "Poblacion IV": { lat: 13.964, lng: 121.3238 },
   Quipot: { lat: 13.945313268161001, lng: 121.32247235279266 },
   "San Agustin": { lat: 13.93192683405691, lng: 121.33505896118986 },
   "San Isidro": { lat: 13.943779678880102, lng: 121.3335552488652 },
@@ -107,11 +129,321 @@ export const LIVESTOCK = [
 ];
 
 export const MORTALITY = [
-  { name: "Cow", count: 0 },
-  { name: "Goat", count: 0 },
-  { name: "Chicken", count: 23 },
-  { name: "Duck", count: 0 },
-  { name: "Carabao", count: 101 },
-  { name: "Pig", count: 0 },
-  { name: "Horse", count: 1 },
+  { name: "Cow", count: 2, img: cowM },
+  { name: "Goat", count: 3, img: goatM },
+  { name: "Chicken", count: 45, img: chickenM },
+  { name: "Duck", count: 34, img: duckM },
+  { name: "Carabao", count: 12, img: carabaoM },
+  { name: "Pig", count: 18, img: pigM },
+  { name: "Horse", count: 1, img: horseM },
+];
+
+export const DATA_GRID_STYLE = {
+  "& .MuiDataGrid-row": {
+    "&:last-child .MuiDataGrid-cell": {
+      borderBottom: "none", // Remove bottom border from last row
+    },
+  },
+  ".MuiDataGrid-columnHeaderTitleContainer": {
+    bgcolor: "primary.main",
+  },
+
+  ".data-grid-header": {
+    bgcolor: "primary.main",
+    color: "#FFF",
+    ".MuiDataGrid-columnHeaderTitle": {
+      fontWeight: "bold",
+    },
+    "&.MuiDataGrid-root": {
+      border: "none",
+      color: "#FFF",
+    },
+    ".MuiIconButton-sizeSmall": {
+      color: "#FFF",
+    },
+  },
+  border: "none", // Add a border
+};
+
+export const FARMERS_TABLE_COLUMN = [
+  {
+    field: "photo",
+    headerName: "Photo",
+    width: 100,
+    editable: false,
+    headerClassName: "data-grid-header",
+    headerAlign: "center",
+    renderCell: (params) => (
+      <Stack justifyContent="center" alignItems="center" height="100%">
+        <StyledBadge
+          overlap="circular"
+          anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+          variant="dot"
+        >
+          <Avatar
+            alt="Remy Sharp"
+            src={params.row?.userImage}
+            sx={{ border: "2px solid #007bff" }}
+          />
+        </StyledBadge>
+      </Stack>
+    ),
+  },
+  {
+    field: "fullname",
+    headerName: "Name",
+    width: 200,
+    editable: false,
+    headerClassName: "data-grid-header",
+  },
+
+  {
+    field: "sex",
+    headerName: "Sex",
+    width: 100,
+    editable: false,
+    headerClassName: "data-grid-header",
+  },
+  {
+    field: "barangay",
+    headerName: "Address",
+    width: 200,
+    editable: false,
+    headerClassName: "data-grid-header",
+  },
+  {
+    field: "contactNo",
+    headerName: "Contact No.",
+    width: 200,
+    editable: false,
+    headerClassName: "data-grid-header",
+  },
+  {
+    field: "birthDate",
+    headerName: "Birth date",
+    width: 100,
+    editable: false,
+    headerClassName: "data-grid-header",
+    renderCell: (params) => {
+      return dayjs(params?.rows?.birthDate).format("MM/DD/YYYY");
+    },
+  },
+  {
+    field: "civilStatus",
+    headerName: "Civil Status",
+    width: 100,
+    editable: false,
+    headerClassName: "data-grid-header",
+    align: "center",
+    headerAlign: "center",
+  },
+  {
+    field: "PWD",
+    headerName: "PWD",
+    width: 100,
+    editable: false,
+    headerClassName: "data-grid-header",
+    align: "center",
+    headerAlign: "center",
+  },
+  {
+    field: "_4ps",
+    headerName: "4P's Beneficiary",
+    width: 200,
+    editable: false,
+    headerClassName: "data-grid-header",
+    align: "center",
+    headerAlign: "center",
+  },
+  {
+    field: "livelihood",
+    headerName: "Main Livelihood",
+    width: 200,
+    editable: false,
+    headerClassName: "data-grid-header",
+  },
+  {
+    field: "contactPersonToNotifyInCaseEmergency",
+    headerName: "Emergency Phone No.",
+    width: 200,
+    editable: false,
+    headerClassName: "data-grid-header",
+  },
+];
+
+export const APPROVAL_TABLE_COLUMN = [
+  {
+    field: "photo",
+    headerName: "Photo",
+    width: 100,
+    editable: false,
+    headerClassName: "data-grid-header",
+    headerAlign: "center",
+    renderCell: (params) => (
+      <Stack justifyContent="center" alignItems="center" height="100%">
+        <Avatar
+          alt="Remy Sharp"
+          src={params.row?.userImage}
+          sx={{ border: "2px solid #007bff" }}
+        />
+      </Stack>
+    ),
+  },
+  {
+    field: "fullname",
+    headerName: "Name",
+    width: 200,
+    editable: false,
+    headerClassName: "data-grid-header",
+  },
+
+  {
+    field: "sex",
+    headerName: "Sex",
+    width: 100,
+    editable: false,
+    headerClassName: "data-grid-header",
+  },
+  {
+    field: "barangay",
+    headerName: "Address",
+    width: 200,
+    editable: false,
+    headerClassName: "data-grid-header",
+  },
+  {
+    field: "contactNo",
+    headerName: "Contact No.",
+    width: 100,
+    editable: false,
+    headerClassName: "data-grid-header",
+  },
+  {
+    field: "birthDate",
+    headerName: "Birth date",
+    width: 100,
+    editable: false,
+    headerClassName: "data-grid-header",
+  },
+  {
+    field: "civilStatus",
+    headerName: "Civil Status",
+    width: 100,
+    editable: false,
+    headerClassName: "data-grid-header",
+    align: "center",
+    headerAlign: "center",
+  },
+  {
+    field: "PWD",
+    headerName: "PWD",
+    width: 100,
+    editable: false,
+    headerClassName: "data-grid-header",
+    align: "center",
+    headerAlign: "center",
+  },
+  {
+    field: "_4ps",
+    headerName: "4P's Beneficiary",
+    width: 200,
+    editable: false,
+    headerClassName: "data-grid-header",
+    align: "center",
+    headerAlign: "center",
+  },
+  {
+    field: "livelihood",
+    headerName: "Main Livelihood",
+    width: 200,
+    editable: false,
+    headerClassName: "data-grid-header",
+  },
+  {
+    field: "contactPersonToNotifyInCaseEmergency",
+    headerName: "Emergency Phone No.",
+    width: 200,
+    editable: false,
+    headerClassName: "data-grid-header",
+  },
+];
+
+export const REPORTS_TABLE_COLUMN = [
+  {
+    field: "fullname",
+    headerName: "Name of Farmer",
+    width: 200,
+    editable: false,
+    headerClassName: "data-grid-header",
+    // filterOperators: getGridStringOperators().filter(
+    //   (operator) => operator.value === "contains"
+    // ),
+  },
+
+  {
+    field: "barangay",
+    headerName: "barangay",
+    width: 100,
+    editable: false,
+    headerClassName: "data-grid-header",
+  },
+  {
+    field: "longitude",
+    headerName: "Longitude",
+    width: 100,
+    editable: false,
+    headerClassName: "data-grid-header",
+  },
+  {
+    field: "latitude",
+    headerName: "Latitude",
+    width: 100,
+    editable: false,
+    headerClassName: "data-grid-header",
+  },
+  {
+    field: "contactNo",
+    headerName: "Contact Details",
+    width: 200,
+    editable: false,
+    headerClassName: "data-grid-header",
+  },
+  {
+    field: "typeofFarm",
+    headerName: "Type of Form (CM, SC, SH)",
+    width: 200,
+    editable: false,
+    headerClassName: "data-grid-header",
+    align: "center",
+  },
+  {
+    field: "totalFarmPopulation",
+    headerName: "Total Farm Population",
+    width: 200,
+    editable: false,
+    headerClassName: "data-grid-header",
+    align: "center",
+  },
+  {
+    field: "rsbsaRegistered",
+    headerName: "RSBSA Registered",
+    width: 200,
+    editable: false,
+    headerClassName: "data-grid-header",
+  },
+  {
+    field: "referenceNo",
+    headerName: "RSBSA Control No.",
+    width: 200,
+    editable: false,
+    headerClassName: "data-grid-header",
+  },
+  {
+    field: "bioSecLvl",
+    headerName: "Biosecurrity Level(0,1,2)",
+    width: 200,
+    editable: false,
+    headerClassName: "data-grid-header",
+    align: "center",
+  },
 ];

@@ -1,29 +1,24 @@
 import { Alert, Snackbar } from "@mui/material";
-import React from "react";
+import React, { useEffect } from "react";
 
 const SnackBar = ({ open, onClose, severity, msg, position }) => {
   return (
-    <div>
-      <Snackbar
-        open={open}
-        autoHideDuration={7000}
+    <Snackbar
+      autoHideDuration={3000} // Adjust as needed
+      open={open}
+      anchorOrigin={position || { horizontal: "right", vertical: "bottom" }}
+      onClose={() => onClose(false)}
+    >
+      <Alert
         onClose={() => onClose(false)}
-        anchorOrigin={position || { horizontal: "right", vertical: "bottom" }}
-        sx={{
-          maxWidth: 450,
-        }}
+        severity={severity || "success"}
+        variant="filled"
+        icon={false}
+        sx={{ width: "100%" }}
       >
-        <Alert
-          onClose={() => onClose(false)}
-          severity={severity}
-          variant="filled"
-          icon={false}
-          sx={{ width: "100%" }}
-        >
-          {msg}
-        </Alert>
-      </Snackbar>
-    </div>
+        {msg}
+      </Alert>
+    </Snackbar>
   );
 };
 

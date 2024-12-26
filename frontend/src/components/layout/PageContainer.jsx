@@ -1,36 +1,34 @@
 import { Box, Paper, Stack, Typography } from "@mui/material";
 import React from "react";
+import Tab from "./Tab";
 
-export const PageContainer = ({
-  titleText,
-  subText,
-  actionButtons,
-  children,
-}) => {
+export const PageContainer = ({ children, tabs, titleText, subText }) => {
   return (
     <Paper
-      sx={{ p: 2, boxSizing: "border-box", width: "100%", borderRadius: 2 }}
+      sx={{
+        boxSizing: "border-box",
+        position: "relative",
+        width: "100%",
+        height: "100%",
+        borderRadius: 3,
+        overflow: "hidden",
+      }}
     >
-      <Stack
-        width="100%"
-        flexDirection="row"
-        justifyContent="space-between"
-        alignItems="center"
-        mb={2}
-      >
-        <Stack>
-          <Typography variant="h6" fontWeight={600}>
-            {titleText}
-          </Typography>
-          <Typography variant="body2" mt={-0.5}>
-            {subText}
-          </Typography>
-        </Stack>
-        <Stack direction="row" gap={1} alignItems="center">
-          {actionButtons}
-        </Stack>
-      </Stack>
-      <Box height="calc(100% - 70px)"> {children}</Box>
+      {tabs && <Tab links={tabs} />}
+
+      <Box p={3} height="calc(100% - 58px)" boxSizing={"border-box"}>
+        {titleText && (
+          <Stack boxSizing="border-box" mb={1}>
+            <Typography variant="h6" fontWeight={600}>
+              {titleText}
+            </Typography>
+            <Typography variant="body2" mt={-0.5}>
+              {subText}
+            </Typography>
+          </Stack>
+        )}
+        {children}
+      </Box>
     </Paper>
   );
 };
