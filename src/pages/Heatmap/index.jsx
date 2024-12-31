@@ -31,45 +31,6 @@ const ALLOWED_BOUNDS = {
 const GMAP_LIBRARIES = ["visualization"];
 
 function Heatmap() {
-  const { livestockData, totalLivestock } = useData();
-  const { isLoaded } = useJsApiLoader({
-    id: "google-map-script",
-    googleMapsApiKey: import.meta.env.VITE_MAP_API_KEY,
-    libraries: GMAP_LIBRARIES,
-  });
-
-  const [map, setMap] = React.useState(null);
-  const [activeCategory, setActiveCategory] = React.useState("");
-  const [activeLivestock, setActiveLivestock] = React.useState("");
-
-  const onLoad = React.useCallback(function callback(map) {
-    map.setZoom(12.5);
-    map.setCenter(GMAP_CENTER);
-
-    // Optionally restrict the draggable area
-    map.setOptions({
-      restriction: {
-        latLngBounds: ALLOWED_BOUNDS,
-        strictBounds: false, // If true, prevents dragging outside bounds
-      },
-    });
-
-    setMap(map);
-  }, []);
-  const onUnmount = React.useCallback(function callback(map) {
-    setMap(null);
-  }, []);
-
-  // React.useEffect(() => {
-  //   if (map) {
-  //     const marker = new window.google.maps.Marker({
-  //       position: center,
-  //       map: map,
-  //       title: "Hello World!",
-  //     });
-  //   }
-  // }, [map]);
-
   return <></>;
 }
 

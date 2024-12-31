@@ -8,7 +8,6 @@ const UseRefreshToken = () => {
     const response = await axios.get("/refresh", {
       withCredentials: true,
     });
-    const roleCode = response.data.roles?.find((v) => v != 0);
     setAuth((prev) => {
       return {
         ...prev,
