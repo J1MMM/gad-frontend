@@ -10,7 +10,6 @@ import {
 import React from "react";
 import backgroundImage from "../../assets/images/header-bg.jpg";
 import { Logout } from "@mui/icons-material";
-import Cookies from "js-cookie";
 import { Navigate, useNavigate } from "react-router-dom";
 
 const headerStyle = {
@@ -30,7 +29,6 @@ const headerStyle = {
 export const UserMenu = (props) => {
   const navigate = useNavigate();
   const handleLogout = () => {
-    Cookies.remove("token");
     // navigate("/login");
     window.location.reload();
     //navigate to login

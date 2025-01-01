@@ -8,8 +8,7 @@ import {
   Typography,
 } from "@mui/material";
 import React from "react";
-import logo from "../../assets/images/favicon.svg";
-import backgroundImage from "../../assets/images/header-bg.jpg";
+import logo from "../../assets/images/plsp-logo.png";
 import UserAvatar from "../shared/UserAvatar";
 import { HEADER_HEIGHT } from "../../utils/constant";
 
@@ -21,18 +20,19 @@ const headerContainerStyle = {
   width: "100%",
   padding: "8px 24px",
   boxSizing: "border-box",
-  borderRadius: 3,
-  bgcolor: "#FFF",
+  borderRadius: 0,
+  bgcolor: "primary.main",
 };
 
 export const Header = (props) => {
   return (
     <Paper sx={headerContainerStyle}>
-      <Typography variant="h6" fontWeight={600} color="primary.main">
-        TIAONG LIVESTOCK MANAGEMENT SYSTEM
-      </Typography>
-
-      <UserAvatar />
+      <Stack direction="row" alignItems="center" gap={2}>
+        <img src={logo} width={65} />
+        <Typography variant="h6" fontWeight={600} color="#FFF">
+          Gender and Development Management System
+        </Typography>
+      </Stack>
     </Paper>
   );
 };

@@ -5,6 +5,7 @@ import SideBar from "./SideBar";
 import { Grid2, Stack } from "@mui/material";
 
 import useAuth from "../../hooks/useAuth";
+import { Header } from "./Header";
 
 const Layout = () => {
   const [open, setOpen] = useState(true);
@@ -25,13 +26,17 @@ const Layout = () => {
         width: "100vw",
         height: "100vh",
         boxSizing: "border-box",
-        bgcolor: "primary.main",
-        p: 1,
-        gap: 1,
+        bgcolor: "#e7e7e7",
+        flexDirection: "column",
       }}
     >
-      <SideBar />
-      <Outlet />
+      <Header />
+      <Box display="flex" height="100%">
+        <SideBar />
+        <Box width="calc(100% - 200px)" p={1} boxSizing="border-box">
+          <Outlet />
+        </Box>
+      </Box>
     </Box>
   );
 };

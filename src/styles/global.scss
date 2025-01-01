@@ -17,27 +17,19 @@ body {
   }
 }
 .nav-link {
+  margin-top: 16px;
   text-decoration: none;
   box-sizing: border-box;
   padding: 14px;
   color: #808080;
   box-sizing: border-box;
-  border-top-left-radius: 24px;
-  border-bottom-left-radius: 24px;
   transition: ease-in;
   transition-duration: 100ms;
 
   &.active {
     transition-duration: 300ms;
-    color: #f2f5f7;
-    background-color: #1976d2;
-    margin-left: 16px;
-    background: rgb(0, 212, 225);
-    background: linear-gradient(
-      90deg,
-      rgba(0, 212, 225, 1) 0%,
-      rgba(25, 117, 208, 1) 100%
-    );
+    color: #266a2d;
+    background-color: #f2f5f7;
   }
 }
 

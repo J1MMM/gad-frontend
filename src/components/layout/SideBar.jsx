@@ -13,7 +13,7 @@ import {
 } from "@mui/icons-material";
 import { Box, Button, Drawer, Paper, Stack, Typography } from "@mui/material";
 import { NavLink, useNavigate } from "react-router-dom";
-import logo from "../../assets/images/logo.jpg";
+import logo from "../../assets/images/plsp-logo.png";
 import { useState } from "react";
 import ConfirmationDialog from "../shared/ConfirmationDialog";
 import UseLogout from "../../hooks/useLogout";
@@ -38,31 +38,17 @@ export default function SideBar() {
           display: "flex",
           flexDirection: "column",
           boxSizing: "border-box",
-          borderRadius: 3,
+          borderRadius: 0,
           overflow: "hidden",
         }}
       >
-        <Box
-          sx={{
-            width: "100%",
-            position: "relative",
-            display: "flex",
-            justifyContent: "center",
-            boxSizing: "border-box",
-            p: 2,
-            mb: 1,
-          }}
-        >
-          <img src={logo} alt="logo" width={75} />
-        </Box>
-
         <NavLink to="/dashboard" className="nav-link">
           <Stack direction={"row"} alignItems="center" gap={2}>
             <BarChart sx={{ fontSize: 28 }} />
             <Typography minWidth={300}>Dasboard</Typography>
           </Stack>
         </NavLink>
-        <NavLink to="/heatmap" className="nav-link">
+        {/* <NavLink to="/heatmap" className="nav-link">
           <Stack direction={"row"} alignItems="center" gap={2}>
             <Place sx={{ fontSize: 28 }} />
             <Typography minWidth={300}>Heatmap</Typography>
@@ -85,7 +71,7 @@ export default function SideBar() {
             <Announcement sx={{ fontSize: 28 }} />
             <Typography minWidth={300}>Announcement</Typography>
           </Stack>
-        </NavLink>
+        </NavLink> */}
         {/* <NavLink to="/archived" className="nav-link">
         <Stack direction={"row"} alignItems="center" gap={2}>
           <Archive sx={{ fontSize: 28 }} />
