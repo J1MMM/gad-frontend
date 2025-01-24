@@ -15,10 +15,10 @@ export default function TableFilterBtn() {
             style: {
               marginTop: "-3px",
               padding: "5.5px 20px",
-              border: "1px solid #266A2D",
+              border: "1px solid ",
+              borderColor: "primary.main",
             },
           },
-          tooltip: { placement: "bottom" },
         }}
       />
     </GridToolbarContainer>

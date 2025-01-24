@@ -136,10 +136,12 @@ export const RECORDS_TABLE_COLUMN = [
   {
     field: "fullname",
     headerName: "Fullname",
-    // width: 200,
     flex: 1,
     editable: false,
     headerClassName: "data-grid-header",
+    renderCell: (params) => {
+      return `${params?.row?.fname} ${params?.row?.mname} ${params?.row?.lname}`;
+    },
   },
   {
     field: "email",
@@ -149,7 +151,7 @@ export const RECORDS_TABLE_COLUMN = [
     headerClassName: "data-grid-header",
   },
   {
-    field: "location",
+    field: "address",
     headerName: "Address",
     flex: 1,
     editable: false,
@@ -163,7 +165,7 @@ export const RECORDS_TABLE_COLUMN = [
     editable: false,
     headerClassName: "data-grid-header",
     renderCell: (params) => {
-      return `${params?.row?.program} ${params?.row?.yearLevel} ${params?.row?.section}`;
+      return `${params?.row?.program} ${params?.row?.yearLevel}-${params?.row?.section}`;
     },
   },
 

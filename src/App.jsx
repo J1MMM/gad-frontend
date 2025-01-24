@@ -5,8 +5,9 @@ import LoginPage from "./pages/LoginPage/";
 import RequireAuth from "./components/auth/RequireAuth.jsx";
 import PersistLogin from "./components/auth/PersistLogin.jsx";
 import Missing from "./pages/404.jsx";
+import Records from "./pages/Records/index.jsx";
+import RecordsLayout from "./pages/Records/RecordsLayout.jsx";
 import Dashboard from "./pages/Dashboard/index.jsx";
-import DashboardLayout from "./pages/Dashboard/DashboardLayout.jsx";
 
 function App() {
   return (
@@ -19,10 +20,10 @@ function App() {
             <Route path="/" element={<Layout />}>
               <Route index element={<Navigate to="dashboard" replace />} />
 
-              <Route path="dashboard" element={<DashboardLayout />}>
-                <Route path="" element={<Dashboard />} />
+              <Route path="dashboard" element={<Dashboard />} />
+              <Route path="records" element={<RecordsLayout />}>
+                <Route path="" element={<Records />} />
               </Route>
-              <Route path="heatmap" element={<Dashboard />} />
             </Route>
           </Route>
         </Route>

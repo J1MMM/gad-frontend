@@ -6,6 +6,8 @@ import {
   BarChart,
   Check,
   Dashboard,
+  Folder,
+  FolderOutlined,
   ListAltRounded,
   Person,
   Pin,
@@ -46,6 +48,12 @@ export default function SideBar() {
           <Stack direction={"row"} alignItems="center" gap={2}>
             <BarChart sx={{ fontSize: 28 }} />
             <Typography minWidth={300}>Dasboard</Typography>
+          </Stack>
+        </NavLink>
+        <NavLink to="/records" className="nav-link">
+          <Stack direction={"row"} alignItems="center" gap={2}>
+            <FolderOutlined sx={{ fontSize: 28 }} />
+            <Typography minWidth={300}>Records</Typography>
           </Stack>
         </NavLink>
         {/* <NavLink to="/heatmap" className="nav-link">
