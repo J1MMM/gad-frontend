@@ -14,6 +14,10 @@ import { ContainerModal } from "../../components/shared/ContainerModal";
 import AddRecordModal from "./AddRecordModal";
 import axios from "../../api/axios";
 import ConfirmationDialog from "../../components/shared/ConfirmationDialog";
+import { useQueryClient } from "react-query";
+import SnackBar from "../../components/shared/SnackBar";
+import { FilterList } from "@mui/icons-material";
+import FilterModal from "./FilterModal";
 
 const initialFormData = {
   fname: "",
@@ -32,25 +36,38 @@ const initialFormData = {
   socioEconomicStatus: "",
   spcResident: "",
 };
+
 const Records = () => {
   const { records } = useData();
   const [formData, setFormData] = useState(initialFormData);
   const [confirmationShow, setConfirmationShow] = useState(false);
   const [formDisable, setFormDisable] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
+  const [alertOpen, setAlertOpen] = useState(false);
+  const [filterModalOpen, setFilterModalOpen] = useState(false);
+  const [alertSeverity, setAlertSeverity] = useState("success");
+  const [alertMsg, setAlertMsg] = useState("");
+  const queryClient = useQueryClient();
 
   const handleSubmit = async () => {
     setFormDisable(true);
     try {
       const response = await axios.post("/records", formData);
+      await queryClient.invalidateQueries("records");
       setModalOpen(false);
+      setAlertSeverity("success");
+      setAlertMsg("A new record has been added successfully.");
+      setFormData(initialFormData);
       console.log(response.data);
     } catch (error) {
       console.log(error);
+      setAlertMsg("An error occurred while adding the data.");
+      setAlertSeverity("error");
     }
 
     setFormDisable(false);
     setConfirmationShow(false);
+    setAlertOpen(true);
   };
 
   return (
@@ -81,8 +98,16 @@ const Records = () => {
               subText={"shprt description herre"}
               actionBtn={
                 <>
-                  <TableFilterBtn />
-                  {/* <TableQuickFilter /> */}
+                  {/* <TableFilterBtn /> */}
+                  <TableQuickFilter />
+                  <Button
+                    variant="outlined"
+                    sx={{ paddingX: "20px" }}
+                    startIcon={<FilterList />}
+                    onClick={() => setFilterModalOpen(true)}
+                  >
+                    Filters
+                  </Button>
                   <Button
                     variant="contained"
                     sx={{ paddingX: "20px" }}
@@ -108,6 +133,11 @@ const Records = () => {
         }}
       />
 
+      <FilterModal
+        open={filterModalOpen}
+        onClose={() => setFilterModalOpen(false)}
+      />
+
       <ConfirmationDialog
         open={confirmationShow}
         setOpen={setConfirmationShow}
@@ -117,6 +147,13 @@ const Records = () => {
         }
         disabled={formDisable}
         confirm={handleSubmit}
+      />
+
+      <SnackBar
+        open={alertOpen}
+        onClose={setAlertOpen}
+        msg={alertMsg}
+        severity={alertSeverity}
       />
     </>
   );

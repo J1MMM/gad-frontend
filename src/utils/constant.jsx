@@ -139,9 +139,6 @@ export const RECORDS_TABLE_COLUMN = [
     flex: 1,
     editable: false,
     headerClassName: "data-grid-header",
-    renderCell: (params) => {
-      return `${params?.row?.fname} ${params?.row?.mname} ${params?.row?.lname}`;
-    },
   },
   {
     field: "email",
@@ -159,14 +156,11 @@ export const RECORDS_TABLE_COLUMN = [
   },
 
   {
-    field: "program",
+    field: "programYearSection",
     headerName: "Program/Year Level/Section",
     flex: 1,
     editable: false,
     headerClassName: "data-grid-header",
-    renderCell: (params) => {
-      return `${params?.row?.program} ${params?.row?.yearLevel}-${params?.row?.section}`;
-    },
   },
 
   {

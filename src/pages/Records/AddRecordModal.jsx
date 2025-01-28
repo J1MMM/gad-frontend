@@ -33,10 +33,10 @@ function AddRecordModal({
       maxWidth="md"
       actionButton={
         <>
-          <Button variant="outlined" onClick={onClose}>
+          <Button size="small" variant="outlined" onClick={onClose}>
             Cancel
           </Button>
-          <Button variant="contained" type="submit">
+          <Button size="small" variant="contained" type="submit">
             Submit
           </Button>
         </>
