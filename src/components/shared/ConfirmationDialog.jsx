@@ -16,7 +16,7 @@ import { forwardRef } from "react";
 
 const ConfirmationDialog = ({
   open,
-  setOpen,
+  onClose,
   title,
   content,
   confirm,
@@ -68,7 +68,7 @@ const ConfirmationDialog = ({
             disabled={!!disabled}
             variant="outlined"
             size="small"
-            onClick={() => setOpen(false)}
+            onClick={onClose}
           >
             Cancel
           </Button>

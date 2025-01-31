@@ -9,16 +9,16 @@ export const PageContainer = ({ children, tabs, titleText, subText }) => {
         boxSizing: "border-box",
         position: "relative",
         width: "100%",
-        height: "100%",
+        height: "calc(100vh - 120px)",
         borderRadius: 3,
         overflow: "hidden",
       }}
     >
       {tabs && <Tab links={tabs} />}
 
-      <Box p={3} height="calc(100% - 58px)" boxSizing={"border-box"}>
+      <Box height="100%" boxSizing={"border-box"}>
         {titleText && (
-          <Stack boxSizing="border-box" mb={1}>
+          <Stack boxSizing="border-box" mb={1} sx={{ p: 3 }}>
             <Typography variant="h6" fontWeight={600}>
               {titleText}
             </Typography>

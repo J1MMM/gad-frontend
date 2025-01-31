@@ -15,21 +15,21 @@ import {
   TextField,
 } from "@mui/material";
 
-function AddRecordModal({
+function EditRecordModal({
   open,
   onClose,
-  setFormData,
-  formData,
+  setSelectedRow,
+  selectedRow,
   handleSubmit,
 }) {
   const handleFormChange = (e) => {
-    setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+    setSelectedRow((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
   return (
     <ContainerModal
       open={open}
       onClose={onClose}
-      title="Add new record"
+      title="Edit Record"
       maxWidth="md"
       actionButton={
         <>
@@ -37,7 +37,7 @@ function AddRecordModal({
             Cancel
           </Button>
           <Button size="small" variant="contained" type="submit">
-            Submit
+            Save
           </Button>
         </>
       }
@@ -53,7 +53,7 @@ function AddRecordModal({
             variant="outlined"
             name="fname"
             onChange={handleFormChange}
-            value={formData?.fname}
+            value={selectedRow?.fname}
             // slotProps={{
             //   input: {
             //     readOnly: props?.readOnly,
@@ -67,7 +67,7 @@ function AddRecordModal({
             label="Middle name"
             variant="outlined"
             name="mname"
-            value={formData?.mname}
+            value={selectedRow?.mname}
             onChange={handleFormChange}
           />
           <TextField
@@ -77,7 +77,7 @@ function AddRecordModal({
             label="Last name"
             variant="outlined"
             name="lname"
-            value={formData?.lname}
+            value={selectedRow?.lname}
             onChange={handleFormChange}
           />
         </Stack>
@@ -90,7 +90,7 @@ function AddRecordModal({
             label="Address"
             variant="outlined"
             name="address"
-            value={formData?.address}
+            value={selectedRow?.address}
             onChange={handleFormChange}
           />
           <FormControl fullWidth margin="dense">
@@ -99,7 +99,7 @@ function AddRecordModal({
               required
               label="Program"
               name="program"
-              value={formData?.program}
+              value={selectedRow?.program}
               onChange={handleFormChange}
             >
               <MenuItem value="BSIT">BSIT</MenuItem>
@@ -113,7 +113,7 @@ function AddRecordModal({
               required
               label="Year Level"
               name="yearLevel"
-              value={formData?.yearLevel}
+              value={selectedRow?.yearLevel}
               onChange={handleFormChange}
             >
               <MenuItem value="1">1ST YEAR</MenuItem>
@@ -129,7 +129,7 @@ function AddRecordModal({
               required
               label="Section"
               name="section"
-              value={formData?.section}
+              value={selectedRow?.section}
               onChange={handleFormChange}
             >
               <MenuItem value="A">A</MenuItem>
@@ -152,7 +152,7 @@ function AddRecordModal({
             variant="outlined"
             name="email"
             type="email"
-            value={formData?.email}
+            value={selectedRow?.email}
             onChange={handleFormChange}
           />
 
@@ -162,7 +162,7 @@ function AddRecordModal({
             label="Comorbidity"
             variant="outlined"
             name="comorbidity"
-            value={formData?.comorbidity}
+            value={selectedRow?.comorbidity}
             onChange={handleFormChange}
           />
 
@@ -172,7 +172,7 @@ function AddRecordModal({
             label="Socio Economic Status"
             variant="outlined"
             name="socioEconomicStatus"
-            value={formData?.socioEconomicStatus}
+            value={selectedRow?.socioEconomicStatus}
             onChange={handleFormChange}
           />
           {/* <TextField 
@@ -191,7 +191,7 @@ function AddRecordModal({
             <RadioGroup
               name="gender"
               onChange={handleFormChange}
-              value={formData?.gender}
+              value={selectedRow?.gender}
             >
               <FormControlLabel
                 value="MALE"
@@ -214,12 +214,12 @@ function AddRecordModal({
                   label="OTHER"
                   control={<Radio />}
                 />
-                <Collapse in={formData?.gender == "OTHER"}>
+                <Collapse in={selectedRow?.gender == "OTHER"}>
                   <TextField
                     variant="standard"
                     autoFocus
                     name="otherGender"
-                    value={formData?.otherGender}
+                    value={selectedRow?.otherGender}
                     onChange={handleFormChange}
                     sx={{}}
                   />
@@ -232,9 +232,10 @@ function AddRecordModal({
             <RadioGroup
               name="spcResident"
               onChange={handleFormChange}
-              value={formData?.spcResident}
+              value={selectedRow?.spcResident}
             >
               <FormControlLabel
+                checked={selectedRow?.spcResident === "YES" ? true : false}
                 value="YES"
                 control={<Radio required />}
                 label="Yes, I live here in San Pablo Area or in one of the barangays here in San Pablo"
@@ -254,7 +255,7 @@ function AddRecordModal({
             <RadioGroup
               name="PWD"
               onChange={handleFormChange}
-              value={formData?.PWD}
+              value={selectedRow?.PWD}
             >
               <FormControlLabel
                 value="YES"
@@ -269,7 +270,7 @@ function AddRecordModal({
             <RadioGroup
               name="governmentBenificiaries"
               onChange={handleFormChange}
-              value={formData?.governmentBenificiaries}
+              value={selectedRow?.governmentBenificiaries}
             >
               <FormControlLabel
                 value="YES"
@@ -285,4 +286,4 @@ function AddRecordModal({
   );
 }
 
-export default AddRecordModal;
+export default EditRecordModal;

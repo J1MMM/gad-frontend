@@ -4,7 +4,13 @@ import { PageContainer } from "../../components/layout/PageContainer";
 
 const RecordsLayout = () => {
   return (
-    <PageContainer>
+    <PageContainer
+      tabs={[
+        ,
+        { to: "", label: "Records" },
+        { to: "archived", label: "Archived" },
+      ]}
+    >
       <Outlet />
     </PageContainer>
   );

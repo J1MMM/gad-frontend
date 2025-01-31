@@ -14,22 +14,22 @@ export const DATA_GRID_STYLE = {
       borderBottom: "none", // Remove bottom border from last row
     },
   },
-  ".MuiDataGrid-columnHeaderTitleContainer": {
-    bgcolor: "primary.main",
-  },
+  // ".MuiDataGrid-columnHeaderTitleContainer": {
+  //   bgcolor: "primary.main",
+  // },
 
   ".data-grid-header": {
-    bgcolor: "primary.main",
-    color: "#FFF",
+    // bgcolor: "primary.main",
+    // color: "#FFF",
     ".MuiDataGrid-columnHeaderTitle": {
       fontWeight: "bold",
     },
     "&.MuiDataGrid-root": {
       border: "none",
-      color: "#FFF",
+      // color: "#FFF",
     },
     ".MuiIconButton-sizeSmall": {
-      color: "#FFF",
+      color: "#075FC8",
     },
   },
   border: "none", // Add a border

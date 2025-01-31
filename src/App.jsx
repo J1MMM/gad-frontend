@@ -8,6 +8,7 @@ import Missing from "./pages/404.jsx";
 import Records from "./pages/Records/index.jsx";
 import RecordsLayout from "./pages/Records/RecordsLayout.jsx";
 import Dashboard from "./pages/Dashboard/index.jsx";
+import ArchivedPage from "./pages/Records/ArchivedPage.jsx";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
               <Route path="dashboard" element={<Dashboard />} />
               <Route path="records" element={<RecordsLayout />}>
                 <Route path="" element={<Records />} />
+                <Route path="archived" element={<ArchivedPage />} />
               </Route>
             </Route>
           </Route>

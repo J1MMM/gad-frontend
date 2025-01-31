@@ -8,6 +8,7 @@ import {
   Dashboard,
   Folder,
   FolderOutlined,
+  List,
   ListAltRounded,
   Person,
   Pin,
@@ -42,6 +43,7 @@ export default function SideBar() {
           boxSizing: "border-box",
           borderRadius: 0,
           overflow: "hidden",
+          pt: 2,
         }}
       >
         <NavLink to="/dashboard" className="nav-link">
@@ -52,7 +54,7 @@ export default function SideBar() {
         </NavLink>
         <NavLink to="/records" className="nav-link">
           <Stack direction={"row"} alignItems="center" gap={2}>
-            <FolderOutlined sx={{ fontSize: 28 }} />
+            <List sx={{ fontSize: 28 }} />
             <Typography minWidth={300}>Records</Typography>
           </Stack>
         </NavLink>
@@ -97,10 +99,10 @@ export default function SideBar() {
       </Paper>
 
       <ConfirmationDialog
-        title="Logout Confirmation"
+        title="Confirm logout"
         content="Are you sure you want to log out? Logging out will end your current session and require you to sign in again to access your account."
         open={logoutConfimation}
-        setOpen={setLogoutConfimation}
+        onClose={() => setLogoutConfimation(false)}
         confirm={signout}
       />
     </>

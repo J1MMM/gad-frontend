@@ -86,7 +86,7 @@ const LoginPage = () => {
         gap={1}
         bgcolor="#F7F7F7"
       >
-        <img src={logo} style={{ maxWidth: 64 }} />
+        {/* <img src={logo} style={{ maxWidth: 64 }} /> */}
         <Typography variant="h5" textAlign="center" color="primary">
           Gender and Development Management System
         </Typography>

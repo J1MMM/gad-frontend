@@ -16,7 +16,15 @@ import axios from "../../api/axios";
 import ConfirmationDialog from "../../components/shared/ConfirmationDialog";
 import { useQueryClient } from "react-query";
 import SnackBar from "../../components/shared/SnackBar";
-import { Add, Archive, Delete, Edit, FilterList } from "@mui/icons-material";
+import {
+  Add,
+  Delete,
+  Edit,
+  FilterList,
+  Restore,
+  RestoreFromTrash,
+  RestorePage,
+} from "@mui/icons-material";
 import FilterModal from "./FilterModal";
 import EditRecordModal from "./EditRecordModal";
 
@@ -38,8 +46,8 @@ const initialFormData = {
   spcResident: "",
 };
 
-const Records = () => {
-  const { records } = useData();
+const ArchivedPage = () => {
+  const { archivedRecords } = useData();
   const [formData, setFormData] = useState(initialFormData);
   const [selectedRow, setSelectedRow] = useState(initialFormData);
   const [formDisable, setFormDisable] = useState(false);
@@ -100,21 +108,20 @@ const Records = () => {
     setAlertOpen(true);
   };
 
-  const archivedRecord = async (id) => {
+  const deleteRecord = async (id) => {
     setFormDisable(true);
     try {
-      const response = await axios.patch(`/records/${id}`);
+      const response = await axios.delete(`/records/${id}`);
       console.log(response.data);
 
-      await queryClient.invalidateQueries("records");
       await queryClient.invalidateQueries("archivedRecords");
       setAlertSeverity("success");
-      setAlertMsg("Record archived successfully.");
+      setAlertMsg("Record deleted successfully.");
       setConfirmationModel((prev) => ({ ...prev, open: false }));
       console.log(response.data);
     } catch (error) {
       console.log(error);
-      setAlertMsg("An error occurred while archiving the record.");
+      setAlertMsg("An error occurred while deleting the record.");
       setAlertSeverity("error");
     }
 
@@ -122,12 +129,26 @@ const Records = () => {
     setFormDisable(false);
   };
 
-  const handleEditBtnClick = (id) => {
-    const row = records.find((record) => record.id === id);
-    console.log(row);
+  const restoreRecord = async (id) => {
+    setFormDisable(true);
+    try {
+      const response = await axios.put(`/records/${id}`);
+      console.log(response.data);
 
-    setSelectedRow(row);
-    setEditModalOpen(true);
+      await queryClient.invalidateQueries("archivedRecords");
+      await queryClient.invalidateQueries("records");
+      setAlertSeverity("success");
+      setAlertMsg("Record restored successfully.");
+      setConfirmationModel((prev) => ({ ...prev, open: false }));
+      console.log(response.data);
+    } catch (error) {
+      console.log(error);
+      setAlertMsg("An error occurred while restoring the record.");
+      setAlertSeverity("error");
+    }
+
+    setAlertOpen(true);
+    setFormDisable(false);
   };
 
   return (
@@ -137,7 +158,7 @@ const Records = () => {
       </Collapse> */}
       <DataGrid
         loading={false}
-        rows={records}
+        rows={archivedRecords}
         // checkboxSelection
         columns={[
           ...RECORDS_TABLE_COLUMN,
@@ -153,9 +174,17 @@ const Records = () => {
               <Box>
                 <IconButton
                   color="primary"
-                  onClick={() => handleEditBtnClick(params.id)}
+                  onClick={() =>
+                    setConfirmationModel((prev) => ({
+                      ...prev,
+                      open: true,
+                      title: "Confirm restore",
+                      content: "Are you sure you want to restore this record?",
+                      onsubmit: () => restoreRecord(params.id),
+                    }))
+                  }
                 >
-                  <Edit>edit</Edit>
+                  <Restore />
                 </IconButton>
                 <IconButton
                   color="error"
@@ -163,13 +192,13 @@ const Records = () => {
                     setConfirmationModel((prev) => ({
                       ...prev,
                       open: true,
-                      title: "Confirm Archive",
-                      content: "Are you sure you want to archive this record?",
-                      onsubmit: () => archivedRecord(params.id),
+                      title: "Confirm delete",
+                      content: "Are you sure you want to delete this record?",
+                      onsubmit: () => deleteRecord(params.id),
                     }))
                   }
                 >
-                  <Archive>delete</Archive>
+                  <Delete>delete</Delete>
                 </IconButton>
               </Box>
             ),
@@ -193,27 +222,12 @@ const Records = () => {
         slots={{
           toolbar: () => (
             <TableToolbar
-              titleText="List of Students"
-              subText={"Student directory overview."}
+              titleText="List of Archived Records"
+              subText={"overview of all archived records"}
               actionBtn={
                 <>
                   {/* <TableFilterBtn /> */}
                   <TableQuickFilter />
-                  <Button
-                    variant="outlined"
-                    sx={{ py: 1 }}
-                    startIcon={<FilterList />}
-                    onClick={() => setFilterModalOpen(true)}
-                  >
-                    Filters
-                  </Button>
-                  <Button
-                    variant="contained"
-                    sx={{ bgcolor: "#00CA80", color: "#FFF", py: 1 }}
-                    onClick={() => setAddModalOpen(true)}
-                  >
-                    Add new record
-                  </Button>
                 </>
               }
             />
@@ -281,4 +295,4 @@ const Records = () => {
   );
 };
 
-export default Records;
+export default ArchivedPage;

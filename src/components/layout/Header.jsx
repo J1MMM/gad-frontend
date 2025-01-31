@@ -27,8 +27,8 @@ const headerContainerStyle = {
 export const Header = (props) => {
   return (
     <Paper sx={headerContainerStyle}>
-      <Stack direction="row" alignItems="center" gap={2}>
-        <img src={logo} width={65} />
+      <Stack direction="row" alignItems="center">
+        {/* <img src={logo} width={65} /> */}
         <Typography variant="h6" fontWeight={600} color="#FFF">
           Gender and Development Management System
         </Typography>

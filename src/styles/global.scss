@@ -24,12 +24,10 @@ body {
   color: #808080;
   box-sizing: border-box;
   transition: ease-in;
-  transition-duration: 100ms;
 
   &.active {
-    transition-duration: 300ms;
     color: #075fc8;
-    background-color: #f2f5f7;
+    background-color: #cfedff;
   }
 }
 

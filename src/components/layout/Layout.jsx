@@ -28,12 +28,13 @@ const Layout = () => {
         boxSizing: "border-box",
         bgcolor: "#e7e7e7",
         flexDirection: "column",
+        overflow: "hidden",
       }}
     >
       <Header />
       <Box display="flex" height="100%">
         <SideBar />
-        <Box width="calc(100% - 200px)" p={1} boxSizing="border-box">
+        <Box width="calc(100% - 200px)" p={2} boxSizing="border-box">
           <Outlet />
         </Box>
       </Box>
