@@ -87,9 +87,9 @@ const LoginPage = () => {
         bgcolor="#F7F7F7"
       >
         {/* <img src={logo} style={{ maxWidth: 64 }} /> */}
-        <Typography variant="h5" textAlign="center" color="primary">
+        {/* <Typography variant="h5" textAlign="center" color="primary">
           Gender and Development Management System
-        </Typography>
+        </Typography> */}
       </Stack>
       <Box
         height="calc(100% - 111.72px)"

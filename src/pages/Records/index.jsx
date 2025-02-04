@@ -187,7 +187,7 @@ const Records = () => {
         disableRowSelectionOnClick
         sx={{
           ...DATA_GRID_STYLE,
-          height: "calc(100vh - 180px)",
+          height: "calc(100vh - 200px)",
         }}
         disableColumnResize
         slots={{

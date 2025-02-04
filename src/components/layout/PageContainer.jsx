@@ -5,11 +5,12 @@ import Tab from "./Tab";
 export const PageContainer = ({ children, tabs, titleText, subText }) => {
   return (
     <Paper
+      elevation={3}
       sx={{
         boxSizing: "border-box",
         position: "relative",
         width: "100%",
-        height: "calc(100vh - 120px)",
+        height: "calc(100vh - 135px)",
         borderRadius: 3,
         overflow: "hidden",
       }}

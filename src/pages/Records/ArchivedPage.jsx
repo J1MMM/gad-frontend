@@ -216,14 +216,14 @@ const ArchivedPage = () => {
         disableRowSelectionOnClick
         sx={{
           ...DATA_GRID_STYLE,
-          height: "calc(100vh - 180px)",
+          height: "calc(100vh - 200px)",
         }}
         disableColumnResize
         slots={{
           toolbar: () => (
             <TableToolbar
               titleText="List of Archived Records"
-              subText={"overview of all archived records"}
+              subText={"Overview of all archived records"}
               actionBtn={
                 <>
                   {/* <TableFilterBtn /> */}

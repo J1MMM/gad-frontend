@@ -1,5 +1,12 @@
 import logo from "../assets/images/logo.jpg";
-import { Avatar, Badge, Button, Stack, styled } from "@mui/material";
+import {
+  Avatar,
+  Badge,
+  Button,
+  Stack,
+  styled,
+  Typography,
+} from "@mui/material";
 import dayjs from "dayjs";
 import { getGridStringOperators } from "@mui/x-data-grid";
 
@@ -34,103 +41,6 @@ export const DATA_GRID_STYLE = {
   },
   border: "none", // Add a border
 };
-
-export const APPROVAL_TABLE_COLUMN = [
-  {
-    field: "photo",
-    headerName: "Photo",
-    width: 100,
-    editable: false,
-    headerClassName: "data-grid-header",
-    headerAlign: "center",
-    renderCell: (params) => (
-      <Stack justifyContent="center" alignItems="center" height="100%">
-        <Avatar
-          alt="Remy Sharp"
-          src={params.row?.userImage}
-          sx={{ border: "2px solid #007bff" }}
-        />
-      </Stack>
-    ),
-  },
-  {
-    field: "fullname",
-    headerName: "Name",
-    width: 200,
-    editable: false,
-    headerClassName: "data-grid-header",
-  },
-
-  {
-    field: "sex",
-    headerName: "Sex",
-    width: 100,
-    editable: false,
-    headerClassName: "data-grid-header",
-  },
-  {
-    field: "barangay",
-    headerName: "Address",
-    width: 200,
-    editable: false,
-    headerClassName: "data-grid-header",
-  },
-  {
-    field: "contactNo",
-    headerName: "Contact No.",
-    width: 100,
-    editable: false,
-    headerClassName: "data-grid-header",
-  },
-  {
-    field: "birthDate",
-    headerName: "Birth date",
-    width: 100,
-    editable: false,
-    headerClassName: "data-grid-header",
-  },
-  {
-    field: "civilStatus",
-    headerName: "Civil Status",
-    width: 100,
-    editable: false,
-    headerClassName: "data-grid-header",
-    align: "center",
-    headerAlign: "center",
-  },
-  {
-    field: "PWD",
-    headerName: "PWD",
-    width: 100,
-    editable: false,
-    headerClassName: "data-grid-header",
-    align: "center",
-    headerAlign: "center",
-  },
-  {
-    field: "_4ps",
-    headerName: "4P's Beneficiary",
-    width: 200,
-    editable: false,
-    headerClassName: "data-grid-header",
-    align: "center",
-    headerAlign: "center",
-  },
-  {
-    field: "livelihood",
-    headerName: "Main Livelihood",
-    width: 200,
-    editable: false,
-    headerClassName: "data-grid-header",
-  },
-  {
-    field: "contactPersonToNotifyInCaseEmergency",
-    headerName: "Emergency Phone No.",
-    width: 200,
-    editable: false,
-    headerClassName: "data-grid-header",
-  },
-];
 
 export const RECORDS_TABLE_COLUMN = [
   {
@@ -169,6 +79,8 @@ export const RECORDS_TABLE_COLUMN = [
     flex: 1,
     editable: false,
     headerClassName: "data-grid-header",
+    renderCell: (params) =>
+      params.row.gender == "OTHER" ? params.row.otherGender : params.row.gender,
   },
   {
     field: "governmentBenificiaries",
