@@ -38,10 +38,26 @@ const initialFormData = {
   spcResident: "",
 };
 
+const filterInitialValues = {
+  fname: "",
+  lname: "",
+  email: "",
+  program: "",
+  yearLevel: "",
+  section: "",
+  gender: "",
+  governmentBenificiaries: "",
+  PWD: "",
+  spcResident: "",
+};
 const Records = () => {
   const { records } = useData();
+  console.log(records);
+
+  const [filteredRecords, setFilteredRecords] = useState([]);
   const [formData, setFormData] = useState(initialFormData);
   const [selectedRow, setSelectedRow] = useState(initialFormData);
+  const [filters, setFilters] = useState(filterInitialValues);
   const [formDisable, setFormDisable] = useState(false);
   const [addModalOpen, setAddModalOpen] = useState(false);
   const [editModalOpen, setEditModalOpen] = useState(false);
@@ -57,6 +73,10 @@ const Records = () => {
     content: "",
     onsubmit: () => {},
   });
+
+  useEffect(() => {
+    setFilteredRecords(records);
+  }, [records]);
 
   const handleAddRecordSubmit = async () => {
     setFormDisable(true);
@@ -130,6 +150,23 @@ const Records = () => {
     setEditModalOpen(true);
   };
 
+  const handleFilterSubmit = () => {
+    const filtered = records.filter((record) => {
+      return Object.keys(filters).every((key) => {
+        if (filters[key] === "") return true; // Ignore empty filters
+        return String(record[key])
+          .toLowerCase()
+          .includes(String(filters[key]).toLowerCase());
+      });
+    });
+
+    setFilteredRecords(filtered);
+    setFilterModalOpen(false);
+    setAlertSeverity("success");
+    setAlertMsg("Filter Applied");
+    setAlertOpen(true);
+  };
+
   return (
     <>
       {/* <Collapse in={true}>
@@ -137,7 +174,7 @@ const Records = () => {
       </Collapse> */}
       <DataGrid
         loading={false}
-        rows={records}
+        rows={filteredRecords}
         // checkboxSelection
         columns={[
           ...RECORDS_TABLE_COLUMN,
@@ -258,6 +295,16 @@ const Records = () => {
       <FilterModal
         open={filterModalOpen}
         onClose={() => setFilterModalOpen(false)}
+        filters={filters}
+        setFilters={setFilters}
+        handleClearFilter={() => {
+          setFilters(filterInitialValues);
+          setFilteredRecords(records);
+        }}
+        handleSubmit={(e) => {
+          e.preventDefault();
+          handleFilterSubmit();
+        }}
       />
 
       <ConfirmationDialog

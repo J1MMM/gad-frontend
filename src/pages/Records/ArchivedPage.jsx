@@ -269,11 +269,6 @@ const ArchivedPage = () => {
         }}
       />
 
-      <FilterModal
-        open={filterModalOpen}
-        onClose={() => setFilterModalOpen(false)}
-      />
-
       <ConfirmationDialog
         open={confirmationModel?.open}
         onClose={() =>

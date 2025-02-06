@@ -75,7 +75,7 @@ const Dashboard = () => {
         >
           <Male sx={{ fontSize: 48 }} color="primary" />
 
-          <Typography fontSize={32}>3,459</Typography>
+          <Typography fontSize={32}>1,879</Typography>
           <Typography variant="body2" position={"absolute"} bottom={15}>
             Total Number of Male
           </Typography>
@@ -91,7 +91,7 @@ const Dashboard = () => {
         >
           <Female sx={{ fontSize: 48 }} color="primary" />
 
-          <Typography fontSize={32}>3,459</Typography>
+          <Typography fontSize={32}>1,152</Typography>
           <Typography variant="body2" position={"absolute"} bottom={15}>
             Total Number of Female
           </Typography>
@@ -107,7 +107,7 @@ const Dashboard = () => {
         >
           <Transgender sx={{ fontSize: 48 }} color="primary" />
 
-          <Typography fontSize={32}>3,459</Typography>
+          <Typography fontSize={32}>425</Typography>
           <Typography variant="body2" position={"absolute"} bottom={15}>
             Total Number of other gender
           </Typography>
