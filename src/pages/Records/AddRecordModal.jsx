@@ -14,6 +14,7 @@ import {
   Stack,
   TextField,
 } from "@mui/material";
+import { LIST_OF_PROGRAM } from "../../utils/constant";
 
 function AddRecordModal({
   open,
@@ -102,8 +103,11 @@ function AddRecordModal({
               value={formData?.program}
               onChange={handleFormChange}
             >
-              <MenuItem value="BSIT">BSIT</MenuItem>
-              <MenuItem value="BSIS">BSIS</MenuItem>
+              {LIST_OF_PROGRAM?.map((v) => (
+                <MenuItem key={v} value={v}>
+                  {v}
+                </MenuItem>
+              ))}
             </Select>
           </FormControl>
 

@@ -12,8 +12,8 @@ import { getGridStringOperators } from "@mui/x-data-grid";
 
 export const HEADER_HEIGHT = 110;
 
-export const BASE_URL = "https://gad-backend.onrender.com";
-// export const BASE_URL = "http://localhost:3500";
+// export const BASE_URL = "https://gad-backend.onrender.com";
+export const BASE_URL = "http://localhost:3500";
 
 export const DATA_GRID_STYLE = {
   "& .MuiDataGrid-row": {
@@ -110,4 +110,21 @@ export const RECORDS_TABLE_COLUMN = [
     editable: false,
     headerClassName: "data-grid-header",
   },
+];
+
+export const LIST_OF_PROGRAM = [
+  "BSBA",
+  "BSOA",
+  "BSHM",
+  "BS Tourism",
+  "BSIT",
+  "BSIS",
+  "BSA",
+  "BSAT",
+  "BSPsy",
+  "AB Polsci",
+  "AB Comm",
+  "BSEco ",
+  "BSED",
+  "BEED",
 ];

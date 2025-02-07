@@ -14,6 +14,7 @@ import {
   Stack,
   TextField,
 } from "@mui/material";
+import { LIST_OF_PROGRAM } from "../../utils/constant";
 
 const filterInitialValues = {
   fname: "",
@@ -93,8 +94,11 @@ function FilterModal({
               onChange={handleFormChange}
             >
               <MenuItem value="">All</MenuItem>
-              <MenuItem value="BSIT">BSIT</MenuItem>
-              <MenuItem value="BSIS">BSIS</MenuItem>
+              {LIST_OF_PROGRAM?.map((v) => (
+                <MenuItem key={v} value={v}>
+                  {v}
+                </MenuItem>
+              ))}
             </Select>
           </FormControl>
 
