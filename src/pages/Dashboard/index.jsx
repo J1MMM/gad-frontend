@@ -12,17 +12,32 @@ import TableQuickFilter from "../../components/form/table/TableQuickFilter";
 import { TableToolbar } from "../../components/form/table/TableToolbar";
 import { PageContainer } from "../../components/layout/PageContainer";
 import { BarChart, PieChart } from "@mui/x-charts";
-import {
-  Female,
-  Male,
-  Storage,
-  StorageRounded,
-  Transgender,
-} from "@mui/icons-material";
+import { Female, Male, StorageRounded, Transgender } from "@mui/icons-material";
+import axios from "../../api/axios";
 
 const Dashboard = () => {
   const { records } = useData();
+  const [analytics, setAnalytics] = useState({});
   console.log(records);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios("/analytics");
+        console.log("response.data");
+        console.log(response.data);
+        setAnalytics(response.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  console.log("analytics");
+  console.log(analytics);
+
   return (
     <Box
       sx={{
@@ -53,7 +68,7 @@ const Dashboard = () => {
           <StorageRounded sx={{ color: "#FFF", fontSize: 48 }} />
 
           <Typography fontSize={32} color="#FFF">
-            3,459
+            {analytics?.totalRecords || 0}
           </Typography>
           <Typography
             color="#FFF"
@@ -75,7 +90,7 @@ const Dashboard = () => {
         >
           <Male sx={{ fontSize: 48 }} color="primary" />
 
-          <Typography fontSize={32}>1,879</Typography>
+          <Typography fontSize={32}> {analytics?.totalMale || 0}</Typography>
           <Typography variant="body2" position={"absolute"} bottom={15}>
             Total Number of Male
           </Typography>
@@ -91,7 +106,7 @@ const Dashboard = () => {
         >
           <Female sx={{ fontSize: 48 }} color="primary" />
 
-          <Typography fontSize={32}>1,152</Typography>
+          <Typography fontSize={32}>{analytics?.totalFemale || 0}</Typography>
           <Typography variant="body2" position={"absolute"} bottom={15}>
             Total Number of Female
           </Typography>
@@ -107,7 +122,9 @@ const Dashboard = () => {
         >
           <Transgender sx={{ fontSize: 48 }} color="primary" />
 
-          <Typography fontSize={32}>425</Typography>
+          <Typography fontSize={32}>
+            {analytics?.totalOtherGender || 0}
+          </Typography>
           <Typography variant="body2" position={"absolute"} bottom={15}>
             Total Number of other gender
           </Typography>
@@ -140,13 +157,23 @@ const Dashboard = () => {
               xAxis={[
                 {
                   scaleType: "band",
-                  data: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
+                  data: analytics?.labels || [
+                    "Sun",
+                    "Mon",
+                    "Tue",
+                    "Wed",
+                    "Thu",
+                    "Fri",
+                    "Sat",
+                  ],
                 },
               ]}
-              series={[
-                { data: [4, 3, 5, 4, 3, 5, 1], label: "Records" },
-                { data: [1, 6, 3, 5, 8, 10, 3], label: "Archived" },
-              ]}
+              series={
+                analytics?.data || [
+                  { data: [4, 3, 5, 4, 3, 5, 1], label: "Records" },
+                  { data: [1, 6, 3, 5, 8, 10, 3], label: "Archived" },
+                ]
+              }
               slotProps={{
                 legend: {
                   direction: "row",
@@ -195,7 +222,7 @@ const Dashboard = () => {
                 height={400}
                 series={[
                   {
-                    data: [
+                    data: analytics?.residencyData || [
                       {
                         id: 0,
                         value: 1,
