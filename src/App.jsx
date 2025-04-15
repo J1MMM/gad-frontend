@@ -9,6 +9,9 @@ import Records from "./pages/Records/index.jsx";
 import RecordsLayout from "./pages/Records/RecordsLayout.jsx";
 import Dashboard from "./pages/Dashboard/index.jsx";
 import ArchivedPage from "./pages/Records/ArchivedPage.jsx";
+import Employee from "./pages/Employees/index.jsx";
+import EmployeesLayout from "./pages/Employees/EmployeesLayout.jsx";
+import EmployeeArchivedPage from "./pages/Employees/EmployeeArchivedPage.jsx";
 
 function App() {
   return (
@@ -22,9 +25,13 @@ function App() {
               <Route index element={<Navigate to="dashboard" replace />} />
 
               <Route path="dashboard" element={<Dashboard />} />
-              <Route path="records" element={<RecordsLayout />}>
+              <Route path="students" element={<RecordsLayout />}>
                 <Route path="" element={<Records />} />
                 <Route path="archived" element={<ArchivedPage />} />
+              </Route>
+              <Route path="employees" element={<EmployeesLayout />}>
+                <Route path="" element={<Employee />} />
+                <Route path="archived" element={<EmployeeArchivedPage />} />
               </Route>
             </Route>
           </Route>

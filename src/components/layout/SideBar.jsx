@@ -52,10 +52,16 @@ export default function SideBar() {
             <Typography minWidth={300}>Dasboard</Typography>
           </Stack>
         </NavLink>
-        <NavLink to="/records" className="nav-link">
+        <NavLink to="/students" className="nav-link">
           <Stack direction={"row"} alignItems="center" gap={2}>
             <List sx={{ fontSize: 28 }} />
-            <Typography minWidth={300}>Records</Typography>
+            <Typography minWidth={300}>Students</Typography>
+          </Stack>
+        </NavLink>
+        <NavLink to="/employees" className="nav-link">
+          <Stack direction={"row"} alignItems="center" gap={2}>
+            <List sx={{ fontSize: 28 }} />
+            <Typography minWidth={300}>Employees</Typography>
           </Stack>
         </NavLink>
         {/* <NavLink to="/heatmap" className="nav-link">

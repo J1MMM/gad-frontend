@@ -2,11 +2,11 @@ import React from "react";
 import { Outlet } from "react-router-dom";
 import { PageContainer } from "../../components/layout/PageContainer";
 
-const RecordsLayout = () => {
+const EmployeesLayout = () => {
   return (
     <PageContainer
       tabs={[
-        { to: "", label: "Students" },
+        { to: "", label: "Employees" },
         { to: "archived", label: "Archived" },
       ]}
     >
@@ -15,4 +15,4 @@ const RecordsLayout = () => {
   );
 };
 
-export default RecordsLayout;
+export default EmployeesLayout;

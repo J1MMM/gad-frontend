@@ -77,127 +77,112 @@ const LoginPage = () => {
   }
   //comment here another one
   return (
-    <Box boxSizing="border-box" height="100vh">
-      <Stack
-        padding={3}
-        boxSizing="border-box"
-        direction="row"
-        alignItems="center"
-        gap={1}
-        bgcolor="#F7F7F7"
+    <Box
+      height="100vh"
+      display="flex"
+      width="100%"
+      alignItems="center"
+      justifyContent="center"
+      bgcolor="#F7F7F7"
+      flexDirection="column"
+    >
+      <Paper
+        onSubmit={handleSubmit}
+        component="form"
+        sx={{
+          p: 3,
+          width: "100%",
+          maxWidth: 350,
+          boxSizing: "border-box",
+        }}
       >
-        {/* <img src={logo} style={{ maxWidth: 64 }} /> */}
-        {/* <Typography variant="h5" textAlign="center" color="primary">
-          Gender and Development Management System
-        </Typography> */}
-      </Stack>
-      <Box
-        height="calc(100% - 111.72px)"
-        display="flex"
-        width="100%"
-        alignItems="center"
-        justifyContent="center"
-        bgcolor="#F7F7F7"
-        flexDirection="column"
-      >
-        <Paper
-          onSubmit={handleSubmit}
-          component="form"
-          sx={{
-            p: 3,
-            width: "100%",
-            maxWidth: 350,
-            boxSizing: "border-box",
-          }}
+        <Stack
+          gap={2}
+          width="100%"
+          height="100%"
+          justifyContent="center"
+          alignItems="center"
         >
-          <Stack
-            gap={2}
-            width="100%"
-            height="100%"
-            justifyContent="center"
-            alignItems="center"
-          >
-            <Stack width="100%" mb={3}>
-              <Typography variant="h5" fontWeight="bold">
-                Sign in
-              </Typography>
-              <Typography variant="body1">Access your account.</Typography>
-            </Stack>
-            <TextField
-              autoFocus
-              label="Email"
-              variant="outlined"
-              fullWidth
-              name="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+          <Stack width="100%" mb={3}>
+            <Typography variant="h5" fontWeight="bold">
+              Sign in
+            </Typography>
+            <Typography variant="body1">Access your account.</Typography>
+          </Stack>
+          <TextField
+            autoFocus
+            label="Email"
+            variant="outlined"
+            fullWidth
+            name="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+            type="email"
+            error={errMsg ? true : false}
+            disabled={disabled ? true : false}
+          />
+
+          <FormControl fullWidth variant="outlined">
+            <InputLabel htmlFor="password">Password</InputLabel>
+            <OutlinedInput
+              autoComplete="off"
+              id="password"
+              type={pwdVisible ? "text" : "password"}
+              name="pwd"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               required
-              type="email"
               error={errMsg ? true : false}
               disabled={disabled ? true : false}
+              endAdornment={
+                <InputAdornment position="end">
+                  <IconButton
+                    disabled={disabled}
+                    edge="end"
+                    onClick={() => setPwdVisible(!pwdVisible)}
+                    aria-label="eye-btn"
+                    aria-labelledby="eye-btn"
+                    className="eye-btn"
+                  >
+                    {pwdVisible ? <VisibilityOff /> : <Visibility />}
+                  </IconButton>
+                </InputAdornment>
+              }
+              label="Password"
             />
-
-            <FormControl fullWidth variant="outlined">
-              <InputLabel htmlFor="password">Password</InputLabel>
-              <OutlinedInput
-                autoComplete="off"
-                id="password"
-                type={pwdVisible ? "text" : "password"}
-                name="pwd"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-                error={errMsg ? true : false}
-                disabled={disabled ? true : false}
-                endAdornment={
-                  <InputAdornment position="end">
-                    <IconButton
-                      disabled={disabled}
-                      edge="end"
-                      onClick={() => setPwdVisible(!pwdVisible)}
-                      aria-label="eye-btn"
-                      aria-labelledby="eye-btn"
-                      className="eye-btn"
-                    >
-                      {pwdVisible ? <VisibilityOff /> : <Visibility />}
-                    </IconButton>
-                  </InputAdornment>
-                }
-                label="Password"
-              />
-            </FormControl>
-            <Stack width="100%" alignItems="start">
-              <Button
-                size="small"
-                sx={{
-                  textDecoration: "none",
-                  color: disabled ? "lightgray" : "primary",
-                  pointerEvents: disabled && "none",
-                  p: 0,
-                }}
-              >
-                Forgot password?
-              </Button>
-            </Stack>
-
+          </FormControl>
+          <Stack width="100%" alignItems="start">
             <Button
-              size="large"
-              variant="contained"
-              type="submit"
-              sx={{ width: "100%", mt: 1 }}
+              size="small"
+              sx={{
+                textDecoration: "none",
+                color: disabled ? "lightgray" : "primary",
+                pointerEvents: disabled && "none",
+                p: 0,
+              }}
             >
-              Sign in
+              Forgot password?
             </Button>
           </Stack>
-        </Paper>
 
-        <SnackBar
-          onClose={() => {}}
-          open={Boolean(errMsg)}
-          msg={errMsg}
-          severity="error"
-        />
-      </Box>
+          <Button
+            size="large"
+            variant="contained"
+            type="submit"
+            sx={{ width: "100%", mt: 1 }}
+          >
+            Sign in
+          </Button>
+        </Stack>
+      </Paper>
+
+      <SnackBar
+        onClose={() => {}}
+        open={Boolean(errMsg)}
+        msg={errMsg}
+        severity="error"
+      />
     </Box>
   );
 };
