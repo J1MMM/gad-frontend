@@ -6,7 +6,7 @@ function Fieldset({ title, children }) {
     <Box
       component={"fieldset"}
       sx={{
-        border: "1px solid #1A237E",
+        border: "1px solid #075FC8",
         borderRadius: 2,
       }}
     >
