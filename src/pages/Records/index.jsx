@@ -64,8 +64,6 @@ const initialFormData = {
   socioEconomicStatus: "",
   spcResident: "",
   archived: false,
-  createdAt: "", // You might want to set this to new Date().toISOString() when submitting
-  archivedAt: "",
 };
 
 const filterInitialValues = {

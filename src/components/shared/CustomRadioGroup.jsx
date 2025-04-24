@@ -40,19 +40,16 @@ function CustomRadioGroup({
               <FormControlLabel
                 key={index}
                 value={option}
-                control={<Radio />}
+                control={<Radio required />}
                 label={option}
               />
-              {option === "Other" && (
+              {option === "Other" && value == "Other" && (
                 <TextField
                   required
                   variant="standard"
                   name={otherTextField}
                   value={otherTextFieldValue}
                   onChange={onChange}
-                  sx={{
-                    display: value == "Other" ? "initial" : "none",
-                  }}
                 />
               )}
             </Box>

@@ -60,7 +60,6 @@ function AddRecordModal({
           name="studentIdNo"
           onChange={handleFormChange}
           value={formData?.studentIdNo}
-          type="number"
         />
         <CustomTextField
           label="Fullname:"
@@ -274,20 +273,22 @@ function AddRecordModal({
             value={formData?.disability}
             options={["Yes", "No"]}
           />
-          <Box
+          {/* <Box
             sx={{
               width: "100%",
               marginLeft: -15,
               display: formData?.disability == "Yes" ? "initial" : "none",
             }}
-          >
+          > */}
+          {formData?.disability == "Yes" && (
             <CustomTextField
               label="If Yes, specify"
               name="specifyDisability"
               onChange={handleFormChange}
               value={formData?.specifyDisability}
             />
-          </Box>
+          )}
+          {/* </Box> */}
         </Box>
         <CustomTextField
           label="Comorbidity"
@@ -333,20 +334,22 @@ function AddRecordModal({
             value={formData?.studentOrganizations}
             options={["Yes", "No"]}
           />
-          <Box
+          {/* <Box
             sx={{
               width: "100%",
               display:
                 formData?.studentOrganizations == "Yes" ? "initial" : "none",
             }}
-          >
+          > */}
+          {formData?.studentOrganizations == "Yes" && (
             <CustomTextField
               label="If Yes, specify"
               name="specifyStudentOrganizations"
               onChange={handleFormChange}
               value={formData?.specifyStudentOrganizations}
             />
-          </Box>
+          )}
+          {/* </Box> */}
         </Box>
 
         <CustomRadioGroup
