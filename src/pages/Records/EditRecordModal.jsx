@@ -1,20 +1,9 @@
 import React from "react";
 import { ContainerModal } from "../../components/shared/ContainerModal";
-import {
-  Button,
-  Collapse,
-  FormControl,
-  FormControlLabel,
-  FormLabel,
-  InputLabel,
-  MenuItem,
-  Radio,
-  RadioGroup,
-  Select,
-  Stack,
-  TextField,
-} from "@mui/material";
-import { LIST_OF_PROGRAM } from "../../utils/constant";
+import { Box, Button } from "@mui/material";
+import Fieldset from "../../components/shared/Fieldset";
+import CustomTextField from "../../components/shared/CustomTextField";
+import CustomRadioGroup from "../../components/shared/CustomRadioGroup";
 
 function EditRecordModal({
   open,
@@ -44,248 +33,299 @@ function EditRecordModal({
       }
       onSubmit={handleSubmit}
     >
-      <Stack>
-        <Stack direction="row" gap={1}>
-          <TextField
-            required
-            margin="dense"
-            fullWidth
-            label="Firstname"
-            variant="outlined"
-            name="fname"
-            onChange={handleFormChange}
-            value={selectedRow?.fname}
-            // slotProps={{
-            //   input: {
-            //     readOnly: props?.readOnly,
-            //   },
-            // }}
-          />
-          <TextField
-            required
-            margin="dense"
-            fullWidth
-            label="Middle name"
-            variant="outlined"
-            name="mname"
-            value={selectedRow?.mname}
-            onChange={handleFormChange}
-          />
-          <TextField
-            required
-            margin="dense"
-            fullWidth
-            label="Last name"
-            variant="outlined"
-            name="lname"
-            value={selectedRow?.lname}
-            onChange={handleFormChange}
-          />
-        </Stack>
+      <Fieldset title={"Personal Information"}>
+        <CustomTextField
+          label="Student ID Number:"
+          name="studentIdNo"
+          onChange={handleFormChange}
+          value={selectedRow?.studentIdNo}
+        />
+        <CustomTextField
+          label="Fullname:"
+          name="fullname"
+          onChange={handleFormChange}
+          value={selectedRow?.fullname}
+        />
+        <CustomTextField
+          label="Age:"
+          name="age"
+          onChange={handleFormChange}
+          value={selectedRow?.age}
+          type="number"
+          width={50}
+        />
 
-        <Stack direction="row" gap={1}>
-          <TextField
-            required
-            margin="dense"
-            fullWidth
-            label="Address"
-            variant="outlined"
-            name="address"
-            value={selectedRow?.address}
+        <CustomTextField
+          label="Email:"
+          name="email"
+          onChange={handleFormChange}
+          value={selectedRow?.email}
+          type="email"
+        />
+
+        <CustomTextField
+          label="Barangay:"
+          name="brgy"
+          onChange={handleFormChange}
+          value={selectedRow?.brgy}
+        />
+        <CustomTextField
+          label="Municipal/City:"
+          name="city"
+          onChange={handleFormChange}
+          value={selectedRow?.city}
+        />
+        <CustomTextField
+          label="Province:"
+          name="province"
+          onChange={handleFormChange}
+          value={selectedRow?.province}
+        />
+
+        <CustomTextField
+          label="Nationality:"
+          name="nationality"
+          onChange={handleFormChange}
+          value={selectedRow?.nationality}
+        />
+
+        <CustomRadioGroup
+          name="spcResident"
+          onChange={handleFormChange}
+          label="Are you a resident of San Pablo City?"
+          options={["Yes", "No"]}
+          value={selectedRow?.spcResident}
+        />
+
+        <CustomRadioGroup
+          name="sex"
+          onChange={handleFormChange}
+          label="Sex Assigned at Birth:"
+          options={["Male", "Female"]}
+          value={selectedRow?.sex}
+        />
+        <CustomRadioGroup
+          name="gender"
+          onChange={handleFormChange}
+          label="Gender Identity:"
+          value={selectedRow?.gender}
+          options={[
+            "Male",
+            "Female",
+            "Non-binary ",
+            "Prefer not to say",
+            "Other",
+          ]}
+          otherTextField="otherGender"
+          otherTextFieldValue={selectedRow?.otherGender}
+        />
+        <CustomRadioGroup
+          name="pronouns"
+          onChange={handleFormChange}
+          label="Preferred Pronouns:"
+          value={selectedRow?.pronouns}
+          options={["He/Him", "She/Her", "They/Them", "Other"]}
+          otherTextField="otherPronouns"
+          otherTextFieldValue={selectedRow?.otherPronouns}
+        />
+
+        <CustomRadioGroup
+          name="civilStatus"
+          onChange={handleFormChange}
+          label="Civil Status:"
+          options={["Single", "Married", "Separated"]}
+          value={selectedRow?.civilStatus}
+        />
+      </Fieldset>
+
+      <Fieldset title={"Academic Information"}>
+        <CustomTextField
+          label="School/University:"
+          name="school"
+          onChange={handleFormChange}
+          value={selectedRow?.school}
+        />
+        <CustomTextField
+          label="Course/Program:"
+          name="program"
+          onChange={handleFormChange}
+          value={selectedRow?.program}
+        />
+
+        <CustomRadioGroup
+          name="yearLevel"
+          onChange={handleFormChange}
+          label="Year Level:"
+          value={selectedRow?.yearLevel}
+          options={["1", "2", "3", "4"]}
+        />
+
+        <CustomRadioGroup
+          name="section"
+          onChange={handleFormChange}
+          label="Section:"
+          value={selectedRow?.section}
+          options={["A", "B", "C", "D", "E", "F", "G"]}
+        />
+        <CustomRadioGroup
+          name="scholarship"
+          onChange={handleFormChange}
+          label="Scholarship/Financial Aid Recipient:"
+          value={selectedRow?.scholarship}
+          options={["Yes", "No"]}
+        />
+        <CustomRadioGroup
+          label="Academic Standing:"
+          name="academicStanding"
+          onChange={handleFormChange}
+          value={selectedRow?.academicStanding}
+          options={["Good", "Probationary", "Other"]}
+          otherTextField="otherAcademicStanding"
+          otherTextFieldValue={selectedRow?.otherAcademicStanding}
+        />
+      </Fieldset>
+
+      <Fieldset title={"Socioeconomic Information"}>
+        <CustomRadioGroup
+          name="livingArrangement"
+          onChange={handleFormChange}
+          label="Living Arrangement:"
+          value={selectedRow?.livingArrangement}
+          options={["With Parents", "Dormitory", "Boarding House", "Alone"]}
+        />
+        <CustomRadioGroup
+          name="householdIncomeLevel"
+          onChange={handleFormChange}
+          label="Household Income Level:"
+          value={selectedRow?.householdIncomeLevel}
+          options={["Low Income", "Middle Income", "High Income"]}
+        />
+        <CustomRadioGroup
+          name="parttimeJob"
+          onChange={handleFormChange}
+          label="Do you have a part-time job?"
+          value={selectedRow?.parttimeJob}
+          options={["Yes", "No"]}
+        />
+        <CustomRadioGroup
+          name="governmentBenificiaries"
+          onChange={handleFormChange}
+          label="Government Benificiaries?"
+          value={selectedRow?.governmentBenificiaries}
+          options={["Yes", "No"]}
+        />
+        <CustomRadioGroup
+          name="sourceFinancialSupport"
+          onChange={handleFormChange}
+          label="Source of Financial Support:"
+          value={selectedRow?.sourceFinancialSupport}
+          options={[
+            "Parents/Family",
+            "Scholarship",
+            "Self-supporting",
+            "Other",
+          ]}
+          otherTextField="otherSourceFinancialSupport"
+          otherTextFieldValue={selectedRow?.otherSourceFinancialSupport}
+        />
+
+        <CustomTextField
+          label="Socio Economic Status"
+          name="socioEconomicStatus"
+          onChange={handleFormChange}
+          value={selectedRow?.socioEconomicStatus}
+        />
+      </Fieldset>
+      <Fieldset title={"Health and Well-being"}>
+        <Box display="flex" alignItems="center">
+          <CustomRadioGroup
+            label="Do you have any disabilities?"
+            name="disability"
             onChange={handleFormChange}
+            value={selectedRow?.disability}
+            options={["Yes", "No"]}
           />
-          <FormControl fullWidth margin="dense">
-            <InputLabel>Program</InputLabel>
-            <Select
-              required
-              label="Program"
-              name="program"
-              value={selectedRow?.program}
-              onChange={handleFormChange}
-            >
-              {LIST_OF_PROGRAM?.map((v) => (
-                <MenuItem key={v} value={v}>
-                  {v}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
 
-          <FormControl fullWidth margin="dense">
-            <InputLabel>Year Level</InputLabel>
-            <Select
-              required
-              label="Year Level"
-              name="yearLevel"
-              value={selectedRow?.yearLevel}
+          {selectedRow?.disability == "Yes" && (
+            <CustomTextField
+              label="If Yes, specify"
+              name="specifyDisability"
               onChange={handleFormChange}
-            >
-              <MenuItem value="1">1ST YEAR</MenuItem>
-              <MenuItem value="2">2ND YEAR</MenuItem>
-              <MenuItem value="3">3RD YEAR</MenuItem>
-              <MenuItem value="4">4TH YEAR</MenuItem>
-            </Select>
-          </FormControl>
-
-          <FormControl fullWidth margin="dense">
-            <InputLabel>Section</InputLabel>
-            <Select
-              required
-              label="Section"
-              name="section"
-              value={selectedRow?.section}
-              onChange={handleFormChange}
-            >
-              <MenuItem value="A">A</MenuItem>
-              <MenuItem value="B">B</MenuItem>
-              <MenuItem value="C">C</MenuItem>
-              <MenuItem value="D">D</MenuItem>
-              <MenuItem value="E">E</MenuItem>
-              <MenuItem value="F">F</MenuItem>
-              <MenuItem value="G">G</MenuItem>
-            </Select>
-          </FormControl>
-        </Stack>
-
-        <Stack direction="row" gap={1}>
-          <TextField
-            required
-            margin="dense"
-            fullWidth
-            label="Email"
-            variant="outlined"
-            name="email"
-            type="email"
-            value={selectedRow?.email}
+              value={selectedRow?.specifyDisability}
+            />
+          )}
+        </Box>
+        <CustomTextField
+          label="Comorbidity"
+          name="comorbidity"
+          onChange={handleFormChange}
+          value={selectedRow?.comorbidity}
+        />
+        <CustomRadioGroup
+          name="accessHealthcare"
+          onChange={handleFormChange}
+          label="Do you have access to healthcare?"
+          value={selectedRow?.accessHealthcare}
+          options={["Yes", "No"]}
+        />
+        <CustomRadioGroup
+          name="healthInsuranceProgram"
+          onChange={handleFormChange}
+          label="Are you a member of a health insurance program?"
+          value={selectedRow?.healthInsuranceProgram}
+          options={["Yes", "No"]}
+        />
+        <CustomRadioGroup
+          name="stressAnxiety"
+          onChange={handleFormChange}
+          label="Do you experience stress/anxiety related to gender identity or discrimination?"
+          value={selectedRow?.stressAnxiety}
+          options={["Yes", "No"]}
+        />
+        <CustomRadioGroup
+          name="discrimination"
+          onChange={handleFormChange}
+          label="Have you experienced any form of gender-based violence or discrimination?"
+          value={selectedRow?.discrimination}
+          options={["Yes", "No", "Prefer not to say"]}
+        />
+      </Fieldset>
+      <Fieldset title={"Participation in Gender and Development Activities"}>
+        <Box>
+          <CustomRadioGroup
+            label="Are you a member of any gender advocacy or student organizations?"
+            name="studentOrganizations"
             onChange={handleFormChange}
+            value={selectedRow?.studentOrganizations}
+            options={["Yes", "No"]}
           />
 
-          <TextField
-            margin="dense"
-            fullWidth
-            label="Comorbidity"
-            variant="outlined"
-            name="comorbidity"
-            value={selectedRow?.comorbidity}
-            onChange={handleFormChange}
-          />
+          {selectedRow?.studentOrganizations == "Yes" && (
+            <CustomTextField
+              label="If Yes, specify"
+              name="specifyStudentOrganizations"
+              onChange={handleFormChange}
+              value={selectedRow?.specifyStudentOrganizations}
+            />
+          )}
+        </Box>
 
-          <TextField
-            margin="dense"
-            fullWidth
-            label="Socio Economic Status"
-            variant="outlined"
-            name="socioEconomicStatus"
-            value={selectedRow?.socioEconomicStatus}
-            onChange={handleFormChange}
-          />
-          {/* <TextField 
-            required
+        <CustomRadioGroup
+          name="GADSeminar"
+          onChange={handleFormChange}
+          label="Have you attended any Gender and Development (GAD) training, seminar, or workshop?"
+          value={selectedRow?.GADSeminar}
+          options={["Yes", "No"]}
+        />
 
-            margin="dense"
-            fullWidth
-            label="Program/Year Level/Section"
-            variant="outlined"
-            name="address"
-            /> */}
-        </Stack>
-        <Stack gap={2} mt={2}>
-          <FormControl>
-            <FormLabel>Gender</FormLabel>
-            <RadioGroup
-              name="gender"
-              onChange={handleFormChange}
-              value={selectedRow?.gender}
-            >
-              <FormControlLabel
-                value="MALE"
-                control={<Radio required />}
-                label="MALE"
-              />
-              <FormControlLabel
-                value="FEMALE"
-                control={<Radio />}
-                label="FEMALE"
-              />
-              <FormControlLabel
-                value="LGBTQIA+"
-                control={<Radio />}
-                label="LGBTQIA+"
-              />
-              <Stack direction="row" alignItems="center">
-                <FormControlLabel
-                  value="OTHER"
-                  label="OTHER"
-                  control={<Radio />}
-                />
-                <Collapse in={selectedRow?.gender == "OTHER"}>
-                  <TextField
-                    variant="standard"
-                    autoFocus
-                    name="otherGender"
-                    value={selectedRow?.otherGender}
-                    onChange={handleFormChange}
-                    sx={{}}
-                  />
-                </Collapse>
-              </Stack>
-            </RadioGroup>
-          </FormControl>
-          <FormControl>
-            <FormLabel>Are you a resident of San Pablo City?</FormLabel>
-            <RadioGroup
-              name="spcResident"
-              onChange={handleFormChange}
-              value={selectedRow?.spcResident}
-            >
-              <FormControlLabel
-                checked={selectedRow?.spcResident === "YES" ? true : false}
-                value="YES"
-                control={<Radio required />}
-                label="Yes, I live here in San Pablo Area or in one of the barangays here in San Pablo"
-              />
-              <FormControlLabel
-                value="NO"
-                control={<Radio />}
-                label="No, I live outside San Pablo Area"
-              />
-            </RadioGroup>
-          </FormControl>
-          <FormControl>
-            <FormLabel>
-              Do you have physical or emotional limitation or a Persons With
-              Disability (PWD)?
-            </FormLabel>
-            <RadioGroup
-              name="PWD"
-              onChange={handleFormChange}
-              value={selectedRow?.PWD}
-            >
-              <FormControlLabel
-                value="YES"
-                control={<Radio required />}
-                label="YES"
-              />
-              <FormControlLabel value="NO" control={<Radio />} label="NO" />
-            </RadioGroup>
-          </FormControl>
-          <FormControl>
-            <FormLabel>Government Benificiaries</FormLabel>
-            <RadioGroup
-              name="governmentBenificiaries"
-              onChange={handleFormChange}
-              value={selectedRow?.governmentBenificiaries}
-            >
-              <FormControlLabel
-                value="YES"
-                control={<Radio required />}
-                label="YES"
-              />
-              <FormControlLabel value="NO" control={<Radio />} label="NO" />
-            </RadioGroup>
-          </FormControl>
-        </Stack>
-      </Stack>
+        <CustomRadioGroup
+          name="InterestedGADSeminar"
+          onChange={handleFormChange}
+          label="Are you interested in participating in future GAD programs?"
+          value={selectedRow?.InterestedGADSeminar}
+          options={["Yes", "No"]}
+        />
+      </Fieldset>
     </ContainerModal>
   );
 }

@@ -1,14 +1,23 @@
 import { Box, TextField, Typography } from "@mui/material";
 import React from "react";
 
-function CustomTextField({ label, name, value, onChange, width, type }) {
+function CustomTextField({
+  label,
+  name,
+  value,
+  onChange,
+  width,
+  type,
+  readOnly,
+  required,
+}) {
   return (
     <Box
       display={"flex"}
-      width={"100%"}
       alignItems={"center"}
       gap={1}
-      //   border={"1px solid"}
+      flexWrap={"wrap"}
+      // border={"1px solid"}
     >
       <Typography
         variant="body2"
@@ -19,7 +28,8 @@ function CustomTextField({ label, name, value, onChange, width, type }) {
         {label}
       </Typography>
       <TextField
-        required
+        required={required ?? true}
+        slotProps={{ input: { readOnly: readOnly } }}
         variant="standard"
         name={name}
         value={value}

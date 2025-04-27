@@ -65,9 +65,9 @@ const Dashboard = () => {
           }}
           elevation={3}
         >
-          <StorageRounded sx={{ color: "#FFF", fontSize: 48 }} />
+          <StorageRounded sx={{ color: "#FFF", fontSize: 35 }} />
 
-          <Typography fontSize={32} color="#FFF">
+          <Typography variant="h4" color="#FFF">
             {analytics?.totalRecords || 0}
           </Typography>
           <Typography
@@ -88,9 +88,9 @@ const Dashboard = () => {
           }}
           elevation={3}
         >
-          <Male sx={{ fontSize: 48 }} color="primary" />
+          <Male sx={{ fontSize: 35 }} color="primary" />
 
-          <Typography fontSize={32}> {analytics?.totalMale || 0}</Typography>
+          <Typography variant="h4"> {analytics?.totalMale || 0}</Typography>
           <Typography variant="body2" position={"absolute"} bottom={15}>
             Total Number of Male
           </Typography>
@@ -104,9 +104,9 @@ const Dashboard = () => {
           }}
           elevation={3}
         >
-          <Female sx={{ fontSize: 48 }} color="primary" />
+          <Female sx={{ fontSize: 35 }} color="primary" />
 
-          <Typography fontSize={32}>{analytics?.totalFemale || 0}</Typography>
+          <Typography variant="h4">{analytics?.totalFemale || 0}</Typography>
           <Typography variant="body2" position={"absolute"} bottom={15}>
             Total Number of Female
           </Typography>
@@ -120,9 +120,9 @@ const Dashboard = () => {
           }}
           elevation={3}
         >
-          <Transgender sx={{ fontSize: 48 }} color="primary" />
+          <Transgender sx={{ fontSize: 35 }} color="primary" />
 
-          <Typography fontSize={32}>
+          <Typography variant="h4">
             {analytics?.totalOtherGender || 0}
           </Typography>
           <Typography variant="body2" position={"absolute"} bottom={15}>
@@ -153,7 +153,7 @@ const Dashboard = () => {
             alignItems="center"
           >
             <BarChart
-              height={500}
+              height={350}
               xAxis={[
                 {
                   scaleType: "band",
@@ -219,7 +219,7 @@ const Dashboard = () => {
               alignItems="center"
             >
               <PieChart
-                height={400}
+                height={350}
                 series={[
                   {
                     data: analytics?.residencyData || [

@@ -1,25 +1,8 @@
 import React from "react";
 import { ContainerModal } from "../../components/shared/ContainerModal";
-import {
-  Box,
-  Button,
-  Collapse,
-  FormControl,
-  FormControlLabel,
-  FormLabel,
-  InputLabel,
-  MenuItem,
-  Radio,
-  RadioGroup,
-  Select,
-  Stack,
-  TextField,
-  Typography,
-} from "@mui/material";
-import { LIST_OF_PROGRAM } from "../../utils/constant";
-import CustomTextField from "../../components/shared/CustomTextField";
+import { Box, Button } from "@mui/material";
 import Fieldset from "../../components/shared/Fieldset";
-import { CheckBox } from "@mui/icons-material";
+import CustomTextField from "../../components/shared/CustomTextField";
 import CustomRadioGroup from "../../components/shared/CustomRadioGroup";
 
 function AddRecordModal({
@@ -103,6 +86,13 @@ function AddRecordModal({
           value={formData?.province}
         />
 
+        <CustomTextField
+          label="Nationality:"
+          name="nationality"
+          onChange={handleFormChange}
+          value={formData?.nationality}
+        />
+
         <CustomRadioGroup
           name="spcResident"
           onChange={handleFormChange}
@@ -147,15 +137,8 @@ function AddRecordModal({
           name="civilStatus"
           onChange={handleFormChange}
           label="Civil Status:"
-          options={["Single", "Married", "Separated"]}
+          options={["Single", "Married", "Separated", "Widowed"]}
           value={formData?.civilStatus}
-        />
-
-        <CustomTextField
-          label="Nationality:"
-          name="nationality"
-          onChange={handleFormChange}
-          value={formData?.nationality}
         />
       </Fieldset>
 
@@ -178,16 +161,9 @@ function AddRecordModal({
           onChange={handleFormChange}
           label="Year Level:"
           value={formData?.yearLevel}
-          options={["1st", "2nd", "3rd", "4th"]}
+          options={["1", "2", "3", "4"]}
         />
 
-        {/* <CustomTextField
-          label="Section:"
-          name="section"
-          onChange={handleFormChange}
-          value={formData?.section}
-          width={100}
-        /> */}
         <CustomRadioGroup
           name="section"
           onChange={handleFormChange}
@@ -273,13 +249,7 @@ function AddRecordModal({
             value={formData?.disability}
             options={["Yes", "No"]}
           />
-          {/* <Box
-            sx={{
-              width: "100%",
-              marginLeft: -15,
-              display: formData?.disability == "Yes" ? "initial" : "none",
-            }}
-          > */}
+
           {formData?.disability == "Yes" && (
             <CustomTextField
               label="If Yes, specify"
@@ -288,7 +258,6 @@ function AddRecordModal({
               value={formData?.specifyDisability}
             />
           )}
-          {/* </Box> */}
         </Box>
         <CustomTextField
           label="Comorbidity"
@@ -334,13 +303,7 @@ function AddRecordModal({
             value={formData?.studentOrganizations}
             options={["Yes", "No"]}
           />
-          {/* <Box
-            sx={{
-              width: "100%",
-              display:
-                formData?.studentOrganizations == "Yes" ? "initial" : "none",
-            }}
-          > */}
+
           {formData?.studentOrganizations == "Yes" && (
             <CustomTextField
               label="If Yes, specify"
@@ -349,7 +312,6 @@ function AddRecordModal({
               value={formData?.specifyStudentOrganizations}
             />
           )}
-          {/* </Box> */}
         </Box>
 
         <CustomRadioGroup

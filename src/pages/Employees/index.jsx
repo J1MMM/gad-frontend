@@ -3,6 +3,7 @@ import { DataGrid } from "@mui/x-data-grid";
 import React, { useEffect, useState } from "react";
 import {
   DATA_GRID_STYLE,
+  EMPLOYEES_TABLE_COLUMN,
   HEADER_HEIGHT,
   RECORDS_TABLE_COLUMN,
 } from "../../utils/constant";
@@ -18,41 +19,65 @@ import { useQueryClient } from "react-query";
 import SnackBar from "../../components/shared/SnackBar";
 import { Add, Archive, Delete, Edit, FilterList } from "@mui/icons-material";
 import FilterModal from "./FilterModal";
-import EditEmployeeModal from "./EditRecordModal";
+import EditRecordModal from "./EditRecordModal";
 
 const initialFormData = {
-  fname: "",
-  mname: "",
-  lname: "",
+  employeeIdNo: "",
+  fullname: "",
   email: "",
-  address: "",
-  program: "",
-  yearLevel: "",
-  section: "",
+  brgy: "",
+  city: "",
+  province: "",
+  department: "",
+  position: "",
+  birthDate: "",
+  age: "",
+  civilStatus: "",
+  sex: "",
   gender: "",
   otherGender: "",
-  governmentBenificiaries: "",
-  comorbidity: "",
-  PWD: "",
-  socioEconomicStatus: "",
+  sexualOrientation: "",
+  otherSexualOrientation: "",
+  disabilityStatus: "",
+  disabilitySpecify: "",
+  ethnicGroup: "",
   spcResident: "",
+
+  noOfDependents: "",
+  soloParent: "",
+  caregivingResponsibilities: "",
+  caregivingResponsibilitiesSpecify: "",
+
+  educationalAttainment: "",
+  otherEducationalAttainment: "",
+
+  employmentStatus: "",
+  otherEmploymentStatus: "",
+  lengthOfService: "",
+  attendGenderSensitivityTraining: "",
+  yearAndTitleOfTraining: "",
+  remarks: "",
+
+  archived: false,
 };
 
 const filterInitialValues = {
-  fname: "",
-  lname: "",
-  email: "",
-  program: "",
-  yearLevel: "",
-  section: "",
+  employeeIdNo: "",
+  fullname: "",
+  department: "",
+  position: "",
+  sex: "",
   gender: "",
-  governmentBenificiaries: "",
-  PWD: "",
+  sexualOrientation: "",
+  soloParent: "",
+  disabilityStatus: "",
   spcResident: "",
+  educationalAttainment: "",
+  employmentStatus: "",
 };
-const Employee = () => {
-  const { records } = useData();
-  console.log(records);
+const Records = () => {
+  const { employees } = useData();
+  console.log(employees);
 
   const [filteredRecords, setFilteredRecords] = useState([]);
   const [formData, setFormData] = useState(initialFormData);
@@ -75,14 +100,14 @@ const Employee = () => {
   });
 
   useEffect(() => {
-    setFilteredRecords(records);
-  }, [records]);
+    setFilteredRecords(employees);
+  }, [employees]);
 
   const handleAddRecordSubmit = async () => {
     setFormDisable(true);
     try {
-      const response = await axios.post("/records", formData);
-      await queryClient.invalidateQueries("records");
+      const response = await axios.post("/employees", formData);
+      await queryClient.invalidateQueries("employees");
       setAddModalOpen(false);
       setAlertSeverity("success");
       setAlertMsg("A new record has been added successfully.");
@@ -102,8 +127,8 @@ const Employee = () => {
   const handleEditRecordSubmit = async () => {
     setFormDisable(true);
     try {
-      const response = await axios.patch("/records", selectedRow);
-      await queryClient.invalidateQueries("records");
+      const response = await axios.patch("/employees", selectedRow);
+      await queryClient.invalidateQueries("employees");
       setEditModalOpen(false);
       setAlertSeverity("success");
       setAlertMsg("Updated successfully.");
@@ -123,11 +148,11 @@ const Employee = () => {
   const archivedRecord = async (id) => {
     setFormDisable(true);
     try {
-      const response = await axios.patch(`/records/${id}`);
+      const response = await axios.patch(`/employees/${id}`);
       console.log(response.data);
 
-      await queryClient.invalidateQueries("records");
-      await queryClient.invalidateQueries("archivedRecords");
+      await queryClient.invalidateQueries("employees");
+      await queryClient.invalidateQueries("archivedEmployees");
       setAlertSeverity("success");
       setAlertMsg("Record archived successfully.");
       setConfirmationModel((prev) => ({ ...prev, open: false }));
@@ -143,7 +168,7 @@ const Employee = () => {
   };
 
   const handleEditBtnClick = (id) => {
-    const row = records.find((record) => record.id === id);
+    const row = employees.find((record) => record.id === id);
     console.log(row);
 
     setSelectedRow(row);
@@ -151,15 +176,15 @@ const Employee = () => {
   };
 
   const handleFilterSubmit = () => {
-    const filtered = records.filter((record) => {
+    const filtered = employees.filter((record) => {
       return Object.keys(filters).every((key) => {
         if (filters[key] === "") return true; // Ignore empty filters
-        return String(record[key])
-          .toLowerCase()
-          .includes(String(filters[key]).toLowerCase());
+        return (
+          String(record[key]).toLowerCase() ===
+          String(filters[key]).toLowerCase()
+        );
       });
     });
-
     setFilteredRecords(filtered);
     setFilterModalOpen(false);
     setAlertSeverity("success");
@@ -177,7 +202,7 @@ const Employee = () => {
         rows={filteredRecords}
         // checkboxSelection
         columns={[
-          ...RECORDS_TABLE_COLUMN,
+          ...EMPLOYEES_TABLE_COLUMN,
           {
             field: "actions",
             headerName: "Actions",
@@ -230,15 +255,15 @@ const Employee = () => {
         slots={{
           toolbar: () => (
             <TableToolbar
-              titleText="List of Students"
-              subText={"Student directory overview."}
+              titleText="Employee Records"
+              subText={"Employees directory overview."}
               actionBtn={
                 <>
                   {/* <TableFilterBtn /> */}
                   <TableQuickFilter />
                   <Button
                     variant="outlined"
-                    sx={{ py: 1 }}
+                    sx={{ py: 1, flexShrink: 0 }}
                     startIcon={<FilterList />}
                     onClick={() => setFilterModalOpen(true)}
                   >
@@ -246,7 +271,12 @@ const Employee = () => {
                   </Button>
                   <Button
                     variant="contained"
-                    sx={{ bgcolor: "#00CA80", color: "#FFF", py: 1 }}
+                    sx={{
+                      bgcolor: "#00CA80",
+                      color: "#FFF",
+                      py: 1,
+                      flexShrink: 0,
+                    }}
                     onClick={() => setAddModalOpen(true)}
                   >
                     Add new record
@@ -269,13 +299,13 @@ const Employee = () => {
             ...prev,
             open: true,
             title: "Confirm adding record",
-            content: "Are you sure you want to add this record?",
+            content: "Are you sure you want to add this student record?",
             onsubmit: handleAddRecordSubmit,
           }));
         }}
       />
 
-      <EditEmployeeModal
+      <EditRecordModal
         open={editModalOpen}
         onClose={() => setEditModalOpen(false)}
         selectedRow={selectedRow}
@@ -299,7 +329,7 @@ const Employee = () => {
         setFilters={setFilters}
         handleClearFilter={() => {
           setFilters(filterInitialValues);
-          setFilteredRecords(records);
+          setFilteredRecords(employees);
         }}
         handleSubmit={(e) => {
           e.preventDefault();
@@ -323,9 +353,10 @@ const Employee = () => {
         onClose={setAlertOpen}
         msg={alertMsg}
         severity={alertSeverity}
+        position={{ horizontal: "center", vertical: "top" }}
       />
     </>
   );
 };
 
-export default Employee;
+export default Records;

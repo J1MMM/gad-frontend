@@ -29,21 +29,49 @@ import FilterModal from "./FilterModal";
 import EditRecordModal from "./EditRecordModal";
 
 const initialFormData = {
-  fname: "",
-  mname: "",
-  lname: "",
-  email: "",
-  address: "",
-  program: "",
-  yearLevel: "",
-  section: "",
+  studentIdNo: "",
+  fullname: "",
+  brgy: "",
+  city: "",
+  province: "",
+  age: "",
+  sex: "",
   gender: "",
   otherGender: "",
+  pronouns: "",
+  otherPronouns: "",
+  civilStatus: "",
+  nationality: "",
+  school: "",
+  program: "",
+  yearLevel: "",
+  scholarship: "",
+  academicStanding: "",
+  otherAcademicStanding: "",
+  livingArrangement: "",
+  householdIncomeLevel: "",
+  parttimeJob: "",
+  sourceFinancialSupport: "",
+  otherSourceFinancialSupport: "",
+  disability: "",
+  specifyDisability: "",
+  accessHealthcare: "",
+  healthInsuranceProgram: "",
+  stressAnxiety: "",
+  discrimination: "",
+  studentOrganizations: "",
+  specifyStudentOrganizations: "",
+  GADSeminar: "",
+  InterestedGADSeminar: "",
+  email: "",
+  address: "",
+  section: "",
   governmentBenificiaries: "",
   comorbidity: "",
   PWD: "",
   socioEconomicStatus: "",
   spcResident: "",
+  archived: false,
 };
 
 const ArchivedPage = () => {
@@ -222,7 +250,7 @@ const ArchivedPage = () => {
         slots={{
           toolbar: () => (
             <TableToolbar
-              titleText="List of Archived Records"
+              titleText="Archived Student Records"
               subText={"Overview of all archived records"}
               actionBtn={
                 <>
@@ -235,7 +263,7 @@ const ArchivedPage = () => {
         }}
       />
 
-      <AddRecordModal
+      {/* <AddRecordModal
         open={addModalOpen}
         onClose={() => setAddModalOpen(false)}
         formData={formData}
@@ -267,7 +295,7 @@ const ArchivedPage = () => {
             onsubmit: handleEditRecordSubmit,
           }));
         }}
-      />
+      /> */}
 
       <ConfirmationDialog
         open={confirmationModel?.open}

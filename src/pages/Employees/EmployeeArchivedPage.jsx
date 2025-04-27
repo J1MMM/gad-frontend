@@ -3,6 +3,7 @@ import { DataGrid } from "@mui/x-data-grid";
 import React, { useEffect, useState } from "react";
 import {
   DATA_GRID_STYLE,
+  EMPLOYEES_TABLE_COLUMN,
   HEADER_HEIGHT,
   RECORDS_TABLE_COLUMN,
 } from "../../utils/constant";
@@ -29,25 +30,53 @@ import FilterModal from "./FilterModal";
 import EditRecordModal from "./EditRecordModal";
 
 const initialFormData = {
-  fname: "",
-  mname: "",
-  lname: "",
-  email: "",
-  address: "",
-  program: "",
-  yearLevel: "",
-  section: "",
+  studentIdNo: "",
+  fullname: "",
+  brgy: "",
+  city: "",
+  province: "",
+  age: "",
+  sex: "",
   gender: "",
   otherGender: "",
+  pronouns: "",
+  otherPronouns: "",
+  civilStatus: "",
+  nationality: "",
+  school: "",
+  program: "",
+  yearLevel: "",
+  scholarship: "",
+  academicStanding: "",
+  otherAcademicStanding: "",
+  livingArrangement: "",
+  householdIncomeLevel: "",
+  parttimeJob: "",
+  sourceFinancialSupport: "",
+  otherSourceFinancialSupport: "",
+  disability: "",
+  specifyDisability: "",
+  accessHealthcare: "",
+  healthInsuranceProgram: "",
+  stressAnxiety: "",
+  discrimination: "",
+  studentOrganizations: "",
+  specifyStudentOrganizations: "",
+  GADSeminar: "",
+  InterestedGADSeminar: "",
+  email: "",
+  address: "",
+  section: "",
   governmentBenificiaries: "",
   comorbidity: "",
   PWD: "",
   socioEconomicStatus: "",
   spcResident: "",
+  archived: false,
 };
 
 const EmployeeArchivedPage = () => {
-  const { archivedRecords } = useData();
+  const { archivedEmployees } = useData();
   const [formData, setFormData] = useState(initialFormData);
   const [selectedRow, setSelectedRow] = useState(initialFormData);
   const [formDisable, setFormDisable] = useState(false);
@@ -66,57 +95,15 @@ const EmployeeArchivedPage = () => {
     onsubmit: () => {},
   });
 
-  const handleAddRecordSubmit = async () => {
-    setFormDisable(true);
-    try {
-      const response = await axios.post("/records", formData);
-      await queryClient.invalidateQueries("records");
-      setAddModalOpen(false);
-      setAlertSeverity("success");
-      setAlertMsg("A new record has been added successfully.");
-      setFormData(initialFormData);
-      console.log(response.data);
-    } catch (error) {
-      console.log(error);
-      setAlertMsg("An error occurred while adding the data.");
-      setAlertSeverity("error");
-    }
-
-    setFormDisable(false);
-    setConfirmationModel((prev) => ({ ...prev, open: false }));
-    setAlertOpen(true);
-  };
-
-  const handleEditRecordSubmit = async () => {
-    setFormDisable(true);
-    try {
-      const response = await axios.patch("/records", selectedRow);
-      await queryClient.invalidateQueries("records");
-      setEditModalOpen(false);
-      setAlertSeverity("success");
-      setAlertMsg("Updated successfully.");
-      setSelectedRow(initialFormData);
-      console.log(response.data);
-    } catch (error) {
-      console.log(error);
-      setAlertMsg("An error occurred while adding the data.");
-      setAlertSeverity("error");
-    }
-
-    setFormDisable(false);
-    setConfirmationModel((prev) => ({ ...prev, open: false }));
-    setAlertOpen(true);
-  };
-
   const deleteRecord = async (id) => {
     setFormDisable(true);
     try {
-      const response = await axios.delete(`/records/${id}`);
+      const response = await axios.delete(`/employees/${id}`);
       console.log(response.data);
 
-      await queryClient.invalidateQueries("archivedRecords");
+      await queryClient.invalidateQueries("archivedEmployees");
       setAlertSeverity("success");
-      setAlertMsg("Record deleted successfully.");
+      setAlertMsg("Employee data deleted successfully.");
       setConfirmationModel((prev) => ({ ...prev, open: false }));
       console.log(response.data);
     } catch (error) {
@@ -132,13 +119,13 @@ const EmployeeArchivedPage = () => {
   const restoreRecord = async (id) => {
     setFormDisable(true);
     try {
-      const response = await axios.put(`/records/${id}`);
+      const response = await axios.put(`/employees/${id}`);
       console.log(response.data);
 
-      await queryClient.invalidateQueries("archivedRecords");
-      await queryClient.invalidateQueries("records");
+      await queryClient.invalidateQueries("archivedEmployees");
+      await queryClient.invalidateQueries("employees");
       setAlertSeverity("success");
-      setAlertMsg("Record restored successfully.");
+      setAlertMsg("Employee data restored successfully.");
       setConfirmationModel((prev) => ({ ...prev, open: false }));
       console.log(response.data);
     } catch (error) {
@@ -153,15 +140,12 @@ const EmployeeArchivedPage = () => {
 
   return (
     <>
-      {/* <Collapse in={true}>
-        <Box bgcolor={"primary.main"} width={"100%"} p={3}></Box>
-      </Collapse> */}
       <DataGrid
         loading={false}
-        rows={archivedRecords}
+        rows={archivedEmployees}
         // checkboxSelection
         columns={[
-          ...RECORDS_TABLE_COLUMN,
+          ...EMPLOYEES_TABLE_COLUMN,
           {
             field: "actions",
             headerName: "Actions",
@@ -222,7 +206,7 @@ const EmployeeArchivedPage = () => {
         slots={{
           toolbar: () => (
             <TableToolbar
-              titleText="List of Archived Records"
+              titleText="Archived Employee Records"
               subText={"Overview of all archived records"}
               actionBtn={
                 <>
@@ -232,40 +216,6 @@ const EmployeeArchivedPage = () => {
               }
             />
           ),
-        }}
-      />
-
-      <AddRecordModal
-        open={addModalOpen}
-        onClose={() => setAddModalOpen(false)}
-        formData={formData}
-        setFormData={setFormData}
-        handleSubmit={(e) => {
-          e.preventDefault();
-          setConfirmationModel((prev) => ({
-            ...prev,
-            open: true,
-            title: "Confirm adding record",
-            content: "Are you sure you want to add this record?",
-            onsubmit: handleAddRecordSubmit,
-          }));
-        }}
-      />
-
-      <EditRecordModal
-        open={editModalOpen}
-        onClose={() => setEditModalOpen(false)}
-        selectedRow={selectedRow}
-        setSelectedRow={setSelectedRow}
-        handleSubmit={(e) => {
-          e.preventDefault();
-          setConfirmationModel((prev) => ({
-            ...prev,
-            open: true,
-            title: "Confirm updating record",
-            content: "Are you sure you want to update this record?",
-            onsubmit: handleEditRecordSubmit,
-          }));
         }}
       />
 

@@ -15,19 +15,8 @@ import {
   TextField,
 } from "@mui/material";
 import { LIST_OF_PROGRAM } from "../../utils/constant";
-
-const filterInitialValues = {
-  fname: "",
-  lname: "",
-  email: "",
-  program: "",
-  yearLevel: "",
-  section: "",
-  gender: "",
-  governmentBenificiaries: "",
-  PWD: "",
-  spcResident: "",
-};
+import CustomTextField from "../../components/shared/CustomTextField";
+import CustomRadioGroup from "../../components/shared/CustomRadioGroup";
 
 function FilterModal({
   open,
@@ -46,7 +35,7 @@ function FilterModal({
       open={open}
       onClose={onClose}
       title="Filters"
-      maxWidth="sm"
+      maxWidth="md"
       actionButton={
         <>
           <Button size="small" variant="outlined" onClick={handleClearFilter}>
@@ -62,45 +51,38 @@ function FilterModal({
       <Stack gap={1}>
         <Stack direction="row" spacing={1}>
           <TextField
-            label="First Name"
-            name="fname"
-            value={filters?.fname}
+            label="Student ID No."
+            name="studentIdNo"
+            value={filters?.studentIdNo}
             onChange={handleFormChange}
             fullWidth
           />
           <TextField
-            label="Last Name"
-            name="lname"
-            value={filters?.lname}
+            label="Fullname"
+            name="fullname"
+            value={filters?.fullname}
             onChange={handleFormChange}
             fullWidth
           />
         </Stack>
-        <TextField
-          label="Email"
-          name="email"
-          value={filters?.email}
-          type="email"
-          onChange={handleFormChange}
-        />
+        <Stack direction="row" spacing={1}>
+          <TextField
+            label="School/University"
+            name="school"
+            value={filters?.school}
+            onChange={handleFormChange}
+            fullWidth
+          />
+        </Stack>
 
         <Stack direction="row" spacing={1}>
-          <FormControl fullWidth margin="dense">
-            <InputLabel>Program</InputLabel>
-            <Select
-              label="Program"
-              name="program"
-              value={filters.program}
-              onChange={handleFormChange}
-            >
-              <MenuItem value="">All</MenuItem>
-              {LIST_OF_PROGRAM?.map((v) => (
-                <MenuItem key={v} value={v}>
-                  {v}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
+          <TextField
+            label="Course/Program"
+            name="program"
+            value={filters?.program}
+            onChange={handleFormChange}
+            fullWidth
+          />
 
           <FormControl fullWidth margin="dense">
             <InputLabel>Year Level</InputLabel>
@@ -138,66 +120,75 @@ function FilterModal({
           </FormControl>
         </Stack>
 
-        <Stack direction="row" justifyContent="space-between">
-          <FormControl>
-            <FormLabel>Gender</FormLabel>
-            <RadioGroup
-              name="gender"
-              value={filters.gender}
-              onChange={handleFormChange}
-            >
-              <FormControlLabel value="MALE" control={<Radio />} label="MALE" />
-              <FormControlLabel
-                value="FEMALE"
-                control={<Radio />}
-                label="FEMALE"
-              />
-              <FormControlLabel
-                value="LGBTQIA+"
-                control={<Radio />}
-                label="LGBTQIA+"
-              />
-              <FormControlLabel
-                value="OTHER"
-                control={<Radio />}
-                label="OTHER"
-              />
-            </RadioGroup>
-          </FormControl>
-          <FormControl>
-            <FormLabel>PWD</FormLabel>
-            <RadioGroup
-              name="PWD"
-              value={filters?.PWD}
-              onChange={handleFormChange}
-            >
-              <FormControlLabel value="YES" control={<Radio />} label="YES" />
-              <FormControlLabel value="NO" control={<Radio />} label="NO" />
-            </RadioGroup>
-          </FormControl>
-          <FormControl>
-            <FormLabel>SPC Resident</FormLabel>
-            <RadioGroup
-              name="spcResident"
-              value={filters?.spcResident}
-              onChange={handleFormChange}
-            >
-              <FormControlLabel value="YES" control={<Radio />} label="YES" />
-              <FormControlLabel value="NO" control={<Radio />} label="NO" />
-            </RadioGroup>
-          </FormControl>
-          <FormControl>
-            <FormLabel>Government Benificiaries</FormLabel>
-            <RadioGroup
-              name="governmentBenificiaries"
-              value={filters?.governmentBenificiaries}
-              onChange={handleFormChange}
-            >
-              <FormControlLabel value="YES" control={<Radio />} label="YES" />
-              <FormControlLabel value="NO" control={<Radio />} label="NO" />
-            </RadioGroup>
-          </FormControl>
-        </Stack>
+        <CustomRadioGroup
+          label={"Sex:"}
+          name="sex"
+          value={filters.sex}
+          options={["Male", "Female"]}
+          onChange={handleFormChange}
+          required={false}
+        />
+
+        <CustomRadioGroup
+          label={"Gender:"}
+          name="gender"
+          value={filters.gender}
+          options={[
+            "Male",
+            "Female",
+            "Non-binary",
+            "Prefer not to say",
+            "Other",
+          ]}
+          onChange={handleFormChange}
+          required={false}
+          disableOtherTxtField={true}
+        />
+        <CustomRadioGroup
+          label={"Preferred Pronouns:"}
+          name="pronouns"
+          value={filters.pronouns}
+          options={["He/Him", "Her/She", "They/Them", "Other"]}
+          onChange={handleFormChange}
+          required={false}
+          disableOtherTxtField={true}
+        />
+        <CustomRadioGroup
+          label={"Civil Status:"}
+          name="civilStatus"
+          value={filters.civilStatus}
+          options={["Single", "Married", "Separated"]}
+          onChange={handleFormChange}
+          required={false}
+          disableOtherTxtField={true}
+        />
+        <CustomRadioGroup
+          label={"Person with disability:"}
+          name="PWD"
+          value={filters.PWD}
+          options={["Yes", "No"]}
+          onChange={handleFormChange}
+          required={false}
+          disableOtherTxtField={true}
+        />
+        <CustomRadioGroup
+          label={"SPC Resident:"}
+          name="spcResident"
+          value={filters.spcResident}
+          options={["Yes", "No"]}
+          onChange={handleFormChange}
+          required={false}
+          disableOtherTxtField={true}
+        />
+        <CustomRadioGroup
+          label={"Government Benificiaries:"}
+          name="governmentBenificiaries"
+          value={filters.governmentBenificiaries}
+          options={["Yes", "No"]}
+          onChange={handleFormChange}
+          required={false}
+          disableOtherTxtField={true}
+        />
       </Stack>
     </ContainerModal>
   );

@@ -8,6 +8,7 @@ import {
   Dashboard,
   Folder,
   FolderOutlined,
+  Group,
   List,
   ListAltRounded,
   Person,
@@ -60,7 +61,7 @@ export default function SideBar() {
         </NavLink>
         <NavLink to="/employees" className="nav-link">
           <Stack direction={"row"} alignItems="center" gap={2}>
-            <List sx={{ fontSize: 28 }} />
+            <Group sx={{ fontSize: 28 }} />
             <Typography minWidth={300}>Employees</Typography>
           </Stack>
         </NavLink>

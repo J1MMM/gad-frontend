@@ -44,6 +44,15 @@ export const DATA_GRID_STYLE = {
 
 export const RECORDS_TABLE_COLUMN = [
   {
+    field: "studentIdNo",
+    headerName: "Student No.",
+    flex: 1,
+    editable: false,
+    headerClassName: "data-grid-header",
+    align: "center",
+    headerAlign: "center",
+  },
+  {
     field: "fullname",
     headerName: "Fullname",
     flex: 1,
@@ -58,7 +67,7 @@ export const RECORDS_TABLE_COLUMN = [
     headerClassName: "data-grid-header",
   },
   {
-    field: "address",
+    field: "completeAddress",
     headerName: "Address",
     flex: 1,
     editable: false,
@@ -74,38 +83,113 @@ export const RECORDS_TABLE_COLUMN = [
   },
 
   {
+    field: "sex",
+    headerName: "Sex",
+    flex: 1,
+    editable: false,
+    headerClassName: "data-grid-header",
+  },
+  {
     field: "gender",
     headerName: "Gender",
     flex: 1,
     editable: false,
     headerClassName: "data-grid-header",
     renderCell: (params) =>
-      params.row.gender == "OTHER" ? params.row.otherGender : params.row.gender,
+      params.row.gender == "Other" ? params.row.otherGender : params.row.gender,
   },
+
   {
-    field: "governmentBenificiaries",
-    headerName: "Government Benificiaries",
+    field: "pronouns",
+    headerName: "Pronouns",
     flex: 1,
     editable: false,
     headerClassName: "data-grid-header",
+    renderCell: (params) =>
+      params.row.pronouns == "Other"
+        ? params.row.otherPronouns
+        : params.row.pronouns,
   },
   {
-    field: "comorbidity",
-    headerName: "Comorbidity",
-    flex: 1,
-    editable: false,
-    headerClassName: "data-grid-header",
-  },
-  {
-    field: "PWD",
+    field: "disability",
     headerName: "PWD",
     flex: 1,
     editable: false,
     headerClassName: "data-grid-header",
   },
+];
+
+export const EMPLOYEES_TABLE_COLUMN = [
   {
-    field: "socioEconomicStatus",
-    headerName: "Socio Economic Status",
+    field: "employeeIdNo",
+    headerName: "Employee No.",
+    flex: 1,
+    editable: false,
+    headerClassName: "data-grid-header",
+    align: "center",
+    headerAlign: "center",
+  },
+  {
+    field: "fullname",
+    headerName: "Fullname",
+    flex: 1,
+    editable: false,
+    headerClassName: "data-grid-header",
+  },
+  {
+    field: "email",
+    headerName: "Email",
+    flex: 1,
+    editable: false,
+    headerClassName: "data-grid-header",
+  },
+  {
+    field: "completeAddress",
+    headerName: "Address",
+    flex: 1,
+    editable: false,
+    headerClassName: "data-grid-header",
+  },
+
+  {
+    field: "department",
+    headerName: "Department/Unit",
+    flex: 1,
+    editable: false,
+    headerClassName: "data-grid-header",
+  },
+
+  {
+    field: "sex",
+    headerName: "Sex",
+    flex: 1,
+    editable: false,
+    headerClassName: "data-grid-header",
+  },
+  {
+    field: "gender",
+    headerName: "Gender",
+    flex: 1,
+    editable: false,
+    headerClassName: "data-grid-header",
+    renderCell: (params) =>
+      params.row.gender == "Other" ? params.row.otherGender : params.row.gender,
+  },
+
+  {
+    field: "sexualOrientation",
+    headerName: "Sexual Orientation",
+    flex: 1,
+    editable: false,
+    headerClassName: "data-grid-header",
+    renderCell: (params) =>
+      params.row.sexualOrientation == "Other"
+        ? params.row.otherSexualOrientation
+        : params.row.sexualOrientation,
+  },
+  {
+    field: "disabilityStatus",
+    headerName: "Disability Status",
     flex: 1,
     editable: false,
     headerClassName: "data-grid-header",

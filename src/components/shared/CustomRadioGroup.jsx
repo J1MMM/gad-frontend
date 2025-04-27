@@ -16,6 +16,8 @@ function CustomRadioGroup({
   otherTextField,
   otherTextFieldValue,
   value,
+  required,
+  disableOtherTxtField,
 }) {
   return (
     <Box
@@ -23,6 +25,7 @@ function CustomRadioGroup({
       width={"100%"}
       alignItems={"flex-start"}
       gap={1}
+      flexWrap={"wrap"}
       // border={"1px solid"}
     >
       <Typography
@@ -40,18 +43,20 @@ function CustomRadioGroup({
               <FormControlLabel
                 key={index}
                 value={option}
-                control={<Radio required />}
+                control={<Radio required={required ?? true} />}
                 label={option}
               />
-              {option === "Other" && value == "Other" && (
-                <TextField
-                  required
-                  variant="standard"
-                  name={otherTextField}
-                  value={otherTextFieldValue}
-                  onChange={onChange}
-                />
-              )}
+              {option === "Other" &&
+                value == "Other" &&
+                disableOtherTxtField != true && (
+                  <TextField
+                    required
+                    variant="standard"
+                    name={otherTextField}
+                    value={otherTextFieldValue}
+                    onChange={onChange}
+                  />
+                )}
             </Box>
           );
         })}

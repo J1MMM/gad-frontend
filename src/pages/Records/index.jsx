@@ -67,16 +67,20 @@ const initialFormData = {
 };
 
 const filterInitialValues = {
-  fname: "",
-  lname: "",
+  studentIdNo: "",
+  fullname: "",
+  school: "",
   email: "",
   program: "",
   yearLevel: "",
   section: "",
+  sex: "",
   gender: "",
-  governmentBenificiaries: "",
+  pronouns: "",
+  civilStatus: "",
   PWD: "",
   spcResident: "",
+  governmentBenificiaries: "",
 };
 const Records = () => {
   const { records } = useData();
@@ -182,12 +186,12 @@ const Records = () => {
     const filtered = records.filter((record) => {
       return Object.keys(filters).every((key) => {
         if (filters[key] === "") return true; // Ignore empty filters
-        return String(record[key])
-          .toLowerCase()
-          .includes(String(filters[key]).toLowerCase());
+        return (
+          String(record[key]).toLowerCase() ===
+          String(filters[key]).toLowerCase()
+        );
       });
     });
-
     setFilteredRecords(filtered);
     setFilterModalOpen(false);
     setAlertSeverity("success");
@@ -201,6 +205,7 @@ const Records = () => {
         <Box bgcolor={"primary.main"} width={"100%"} p={3}></Box>
       </Collapse> */}
       <DataGrid
+        // onRowDoubleClick={() => setEditModalOpen(true)}
         loading={false}
         rows={filteredRecords}
         // checkboxSelection
@@ -258,7 +263,7 @@ const Records = () => {
         slots={{
           toolbar: () => (
             <TableToolbar
-              titleText="List of Students"
+              titleText="Student Records"
               subText={"Student directory overview."}
               actionBtn={
                 <>
@@ -266,7 +271,7 @@ const Records = () => {
                   <TableQuickFilter />
                   <Button
                     variant="outlined"
-                    sx={{ py: 1 }}
+                    sx={{ py: 1, flexShrink: 0 }}
                     startIcon={<FilterList />}
                     onClick={() => setFilterModalOpen(true)}
                   >
@@ -274,7 +279,12 @@ const Records = () => {
                   </Button>
                   <Button
                     variant="contained"
-                    sx={{ bgcolor: "#00CA80", color: "#FFF", py: 1 }}
+                    sx={{
+                      bgcolor: "#00CA80",
+                      color: "#FFF",
+                      py: 1,
+                      flexShrink: 0,
+                    }}
                     onClick={() => setAddModalOpen(true)}
                   >
                     Add new record
@@ -297,7 +307,7 @@ const Records = () => {
             ...prev,
             open: true,
             title: "Confirm adding record",
-            content: "Are you sure you want to add this record?",
+            content: "Are you sure you want to add this student record?",
             onsubmit: handleAddRecordSubmit,
           }));
         }}
@@ -351,6 +361,7 @@ const Records = () => {
         onClose={setAlertOpen}
         msg={alertMsg}
         severity={alertSeverity}
+        position={{ horizontal: "center", vertical: "top" }}
       />
     </>
   );
