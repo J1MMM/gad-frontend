@@ -143,7 +143,6 @@ const Dashboard = () => {
         elevation={3}
         sx={{
           position: "relative",
-          height: "100%",
           borderRadius: 3,
           padding: 2,
           boxSizing: "border-box",

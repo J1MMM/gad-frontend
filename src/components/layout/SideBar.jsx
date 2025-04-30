@@ -50,7 +50,9 @@ export default function SideBar() {
         <NavLink to="/dashboard" className="nav-link">
           <Stack direction={"row"} alignItems="center" gap={2}>
             <BarChart sx={{ fontSize: 28 }} />
-            <Typography minWidth={300}>Dasboard</Typography>
+            <Typography fontFamily={""} minWidth={300}>
+              Dasboard
+            </Typography>
           </Stack>
         </NavLink>
         <NavLink to="/students" className="nav-link">
