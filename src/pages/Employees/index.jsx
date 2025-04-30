@@ -270,16 +270,16 @@ const Records = () => {
                     Filters
                   </Button>
                   <Button
+                    startIcon={<Add />}
                     variant="contained"
                     sx={{
-                      bgcolor: "#00CA80",
                       color: "#FFF",
                       py: 1,
                       flexShrink: 0,
                     }}
                     onClick={() => setAddModalOpen(true)}
                   >
-                    Add new record
+                    New Employee
                   </Button>
                 </>
               }
@@ -353,7 +353,7 @@ const Records = () => {
         onClose={setAlertOpen}
         msg={alertMsg}
         severity={alertSeverity}
-        position={{ horizontal: "center", vertical: "top" }}
+        position={{ horizontal: "right", vertical: "bottom" }}
       />
     </>
   );

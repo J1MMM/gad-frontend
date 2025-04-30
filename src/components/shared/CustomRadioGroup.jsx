@@ -22,7 +22,7 @@ function CustomRadioGroup({
   return (
     <Box
       display={"flex"}
-      width={"100%"}
+      // width={"100%"}
       alignItems={"flex-start"}
       gap={1}
       flexWrap={"wrap"}
