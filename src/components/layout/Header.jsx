@@ -17,6 +17,8 @@ const headerContainerStyle = {
   alignItems: "center",
   justifyContent: "space-between",
   height: HEADER_HEIGHT,
+  maxHeight: HEADER_HEIGHT,
+  minHeight: HEADER_HEIGHT,
   width: "100%",
   padding: "8px 24px",
   boxSizing: "border-box",

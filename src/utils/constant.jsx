@@ -10,7 +10,7 @@ import {
 import dayjs from "dayjs";
 import { getGridStringOperators } from "@mui/x-data-grid";
 
-export const HEADER_HEIGHT = 110;
+export const HEADER_HEIGHT = 90;
 
 // export const BASE_URL = "https://gad-backend.onrender.com";
 export const BASE_URL = "http://localhost:3500";

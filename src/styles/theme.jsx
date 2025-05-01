@@ -8,6 +8,9 @@ const theme = createTheme({
     },
   },
   palette: {
+    info: {
+      main: "#FFF",
+    },
     primary: {
       // main: "#266A2D",
       main: "#6200E8",
