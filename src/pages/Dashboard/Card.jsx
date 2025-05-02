@@ -52,7 +52,13 @@ function Card({ item, index }) {
           color={index == 0 ? "info" : "primary"}
         />
       )}
-      <Typography color={index == 0 ? "#FFF" : "grey"} fontSize={12}>
+      <Typography
+        color={index == 0 ? "#FFF" : "grey"}
+        fontSize={12}
+        position={"absolute"}
+        bottom={10}
+        left={10}
+      >
         {item?.sub}
       </Typography>
     </Paper>

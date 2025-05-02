@@ -30,14 +30,19 @@ function RecordsOverviewChart({ analytics }) {
         borderRadius: 3,
         padding: 2,
         boxSizing: "border-box",
+        display: "flex",
+        flexDirection: "column",
       }}
     >
-      <Typography variant="h6" fontWeight={600} mb={3}>
+      <Typography variant="h6" fontWeight={600}>
         Records Overview
       </Typography>
 
       <BarChart
         height={250}
+        // viewBox={{
+        //   y: -30,
+        // }}
         xAxis={[
           {
             scaleType: "band",

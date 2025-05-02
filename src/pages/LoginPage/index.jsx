@@ -105,7 +105,7 @@ const LoginPage = () => {
         >
           <Stack width="100%" mb={3}>
             <Typography variant="h5" fontWeight="bold">
-              Sign in
+              Login
             </Typography>
             <Typography variant="body1">Access your account.</Typography>
           </Stack>

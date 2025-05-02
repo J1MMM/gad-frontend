@@ -361,7 +361,7 @@ const Records = () => {
         onClose={setAlertOpen}
         msg={alertMsg}
         severity={alertSeverity}
-        position={{ horizontal: "center", vertical: "top" }}
+        position={{ horizontal: "right", vertical: "bottom" }}
       />
     </>
   );

@@ -20,22 +20,22 @@ function App() {
         <Route element={<PersistLogin />}>
           <Route path="/login" element={<LoginPage />} />
 
-          <Route element={<RequireAuth />}>
-            <Route path="/" element={<Layout />}>
-              <Route index element={<Navigate to="dashboard" replace />} />
+          {/* <Route element={<RequireAuth />}> */}
+          <Route path="/" element={<Layout />}>
+            <Route index element={<Navigate to="dashboard" replace />} />
 
-              <Route path="dashboard" element={<Dashboard />} />
-              <Route path="students" element={<RecordsLayout />}>
-                <Route path="" element={<Records />} />
-                <Route path="archived" element={<ArchivedPage />} />
-              </Route>
-              <Route path="employees" element={<EmployeesLayout />}>
-                <Route path="" element={<Employee />} />
-                <Route path="archived" element={<EmployeeArchivedPage />} />
-              </Route>
+            <Route path="dashboard" element={<Dashboard />} />
+            <Route path="students" element={<RecordsLayout />}>
+              <Route path="" element={<Records />} />
+              <Route path="archived" element={<ArchivedPage />} />
+            </Route>
+            <Route path="employees" element={<EmployeesLayout />}>
+              <Route path="" element={<Employee />} />
+              <Route path="archived" element={<EmployeeArchivedPage />} />
             </Route>
           </Route>
         </Route>
+        {/* </Route> */}
         <Route path="*" element={<Missing />} />
       </Routes>
     </BrowserRouter>
