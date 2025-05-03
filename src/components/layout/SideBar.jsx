@@ -17,7 +17,6 @@ import {
 } from "@mui/icons-material";
 import { Box, Button, Drawer, Paper, Stack, Typography } from "@mui/material";
 import { NavLink, useNavigate } from "react-router-dom";
-import logo from "../../assets/images/plsp-logo.png";
 import { useState } from "react";
 import ConfirmationDialog from "../shared/ConfirmationDialog";
 import UseLogout from "../../hooks/useLogout";

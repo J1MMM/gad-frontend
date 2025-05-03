@@ -1,4 +1,3 @@
-import logo from "../assets/images/logo.jpg";
 import {
   Avatar,
   Badge,

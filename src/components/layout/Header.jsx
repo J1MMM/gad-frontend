@@ -8,7 +8,6 @@ import {
   Typography,
 } from "@mui/material";
 import React from "react";
-import logo from "../../assets/images/plsp-logo.png";
 import UserAvatar from "../shared/UserAvatar";
 import { HEADER_HEIGHT } from "../../utils/constant";
 

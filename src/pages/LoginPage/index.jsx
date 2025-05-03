@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
-import logo from "../../assets/images/plsp-logo.png";
 import {
   Box,
   Button,
@@ -17,9 +16,17 @@ import {
 import "./index.scss";
 import axios from "../../api/axios";
 import useAuth from "../../hooks/useAuth";
-import { Verified, Visibility, VisibilityOff } from "@mui/icons-material";
+import {
+  AccountCircleOutlined,
+  Person2Outlined,
+  PersonOutline,
+  Verified,
+  Visibility,
+  VisibilityOff,
+} from "@mui/icons-material";
 import SnackBar from "../../components/shared/SnackBar";
 import { ContainerModal } from "../../components/shared/ContainerModal";
+import wave from "../../assets/images/wave.svg";
 
 const LoginPage = () => {
   const { auth, setAuth } = useAuth();
@@ -78,15 +85,15 @@ const LoginPage = () => {
   //comment here another one
   return (
     <Box
+      position="relative"
       height="100vh"
       display="flex"
       width="100%"
       alignItems="center"
       justifyContent="center"
-      bgcolor="#F7F7F7"
       flexDirection="column"
     >
-      <Paper
+      <Box
         onSubmit={handleSubmit}
         component="form"
         sx={{
@@ -94,21 +101,34 @@ const LoginPage = () => {
           width: "100%",
           maxWidth: 350,
           boxSizing: "border-box",
+          bgcolor: "#E6E6E6",
+          boxShadow: "-13px 12px 5px 0px rgba(0,0,0,0.34)",
+          borderRadius: 2,
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
         }}
       >
+        <Box
+          bgcolor={"primary.main"}
+          display={"flex"}
+          justifyContent={"center"}
+          alignItems={"center"}
+          p={2}
+          boxSizing={"border-box"}
+          borderRadius={"50%"}
+          mt={-8}
+        >
+          <PersonOutline color="info" sx={{ fontSize: 60 }} />
+        </Box>
         <Stack
+          pt={5}
           gap={2}
           width="100%"
           height="100%"
           justifyContent="center"
           alignItems="center"
         >
-          <Stack width="100%" mb={3}>
-            <Typography variant="h5" fontWeight="bold">
-              Login
-            </Typography>
-            <Typography variant="body1">Access your account.</Typography>
-          </Stack>
           <TextField
             autoFocus
             label="Email"
@@ -121,6 +141,9 @@ const LoginPage = () => {
             type="email"
             error={errMsg ? true : false}
             disabled={disabled ? true : false}
+            sx={{
+              bgcolor: "#FFF",
+            }}
           />
 
           <FormControl fullWidth variant="outlined">
@@ -135,6 +158,9 @@ const LoginPage = () => {
               required
               error={errMsg ? true : false}
               disabled={disabled ? true : false}
+              sx={{
+                bgcolor: "#FFF",
+              }}
               endAdornment={
                 <InputAdornment position="end">
                   <IconButton
@@ -172,10 +198,24 @@ const LoginPage = () => {
             type="submit"
             sx={{ width: "100%", mt: 1 }}
           >
-            Sign in
+            Login
           </Button>
         </Stack>
-      </Paper>
+      </Box>
+
+      <Box
+        position={"absolute"}
+        bottom={0}
+        left={0}
+        width={"100%"}
+        zIndex={-1}
+        height={"10%"}
+        // border={"1px solid"}
+        boxSizing={"border-box"}
+        bgcolor={"primary.main"}
+      >
+        <img style={{ marginTop: -1000 }} src={wave} width={"100%"} />
+      </Box>
 
       <SnackBar
         onClose={() => {}}
