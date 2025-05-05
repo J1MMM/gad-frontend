@@ -1,6 +1,6 @@
 import { Box, Paper, Stack, Typography } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   DATA_GRID_STYLE,
   HEADER_HEIGHT,
@@ -20,51 +20,32 @@ import RecordsResidencyChart from "./RecordsResidencyChart";
 import PWDRecordsChart from "./PWDRecordsChart";
 
 const Dashboard = () => {
-  const { records } = useData();
-  const [analytics, setAnalytics] = useState({});
-  console.log(records);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios("/analytics");
-        console.log("response.data");
-        console.log(response.data);
-        setAnalytics(response.data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
-    fetchData();
-  }, []);
-
-  console.log("analytics");
-  console.log(analytics);
+  const { analyticsCards, pwdAnalytics, analytics, residecyAnalytics } =
+    useData();
 
   const cardData = [
     {
       title: "Total Records",
       sub: "The number of records stored in the system",
-      value: analytics?.totalRecords || 0,
+      value: analyticsCards?.totalRecords || 0,
       icon: <StorageRounded sx={{ color: "#FFF", fontSize: 20 }} />,
     },
     {
       title: "Total Male",
       sub: "The number of records identified as male",
-      value: analytics?.totalMale || 0,
+      value: analyticsCards?.totalMale || 0,
       icon: <Male sx={{ color: "primary.main", fontSize: 20 }} />,
     },
     {
       title: "Total Female",
       sub: "The number of records identified as female",
-      value: analytics?.totalFemale || 0,
+      value: analyticsCards?.totalFemale || 0,
       icon: <Female sx={{ color: "primary.main", fontSize: 20 }} />,
     },
     {
       title: "Total Other Genders",
       sub: "Total number of other gender records",
-      value: analytics?.totalOtherGender || 0,
+      value: analyticsCards?.totalOtherGender || 0,
       icon: <Transgender sx={{ color: "primary.main", fontSize: 20 }} />,
     },
   ];
@@ -82,9 +63,9 @@ const Dashboard = () => {
       }}
     >
       <Cards cardData={cardData} />
-      <PWDRecordsChart analytics={analytics} />
+      <PWDRecordsChart analytics={pwdAnalytics} />
       <RecordsOverviewChart analytics={analytics} />
-      <RecordsResidencyChart analytics={analytics} />
+      <RecordsResidencyChart analytics={residecyAnalytics} />
     </Box>
   );
 };

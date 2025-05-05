@@ -102,7 +102,8 @@ const LoginPage = () => {
           maxWidth: 350,
           boxSizing: "border-box",
           bgcolor: "#E6E6E6",
-          boxShadow: "-13px 12px 5px 0px rgba(0,0,0,0.34)",
+          filter: "drop-shadow(-13px 12px 5px rgba(0, 0, 0, 0.34))",
+
           borderRadius: 2,
           display: "flex",
           flexDirection: "column",

@@ -115,7 +115,10 @@ const Records = () => {
       console.log(response.data);
     } catch (error) {
       console.log(error);
-      setAlertMsg("An error occurred while adding the data.");
+      setAlertMsg(
+        error?.response?.data?.message ||
+          "An error occurred while adding the record."
+      );
       setAlertSeverity("error");
     }
 
@@ -136,7 +139,10 @@ const Records = () => {
       console.log(response.data);
     } catch (error) {
       console.log(error);
-      setAlertMsg("An error occurred while adding the data.");
+      setAlertMsg(
+        error?.response?.data?.message ||
+          "An error occurred while updating the record."
+      );
       setAlertSeverity("error");
     }
 
@@ -159,7 +165,10 @@ const Records = () => {
       console.log(response.data);
     } catch (error) {
       console.log(error);
-      setAlertMsg("An error occurred while archiving the record.");
+      setAlertMsg(
+        error?.response?.data?.message ||
+          "An error occurred while archiving the record."
+      );
       setAlertSeverity("error");
     }
 

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Outlet } from "react-router-dom";
 import Box from "@mui/material/Box";
 import SideBar from "./SideBar";
@@ -6,18 +6,57 @@ import { Grid2, Stack } from "@mui/material";
 
 import useAuth from "../../hooks/useAuth";
 import { Header } from "./Header";
+import useData from "../../hooks/useData";
+import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 
 const Layout = () => {
-  const [open, setOpen] = useState(true);
-  const auth = useAuth();
+  const {
+    records,
+    employees,
+    setAnalyticsCards,
+    setPwdAnalytics,
+    setAnalytics,
+    setResidencyAnalytics,
+  } = useData();
 
-  const handleDrawerOpen = () => {
-    setOpen((prev) => !prev);
-  };
+  const axiosPrivate = useAxiosPrivate();
 
-  const handleDrawerClose = () => {
-    setOpen(false);
-  };
+  useEffect(() => {
+    const controller = new AbortController();
+
+    const fetchData = async () => {
+      try {
+        const [
+          cardsDataRes,
+          pwdAnalyticsRes,
+          residencyAnalyticsRes,
+          analyticsRes,
+        ] = await Promise.all([
+          axiosPrivate("/analytics/cards", { signal: controller.signal }),
+          axiosPrivate("/analytics/pwd", { signal: controller.signal }),
+          axiosPrivate("/analytics/residency", { signal: controller.signal }),
+          axiosPrivate("/analytics", { signal: controller.signal }),
+        ]);
+
+        setAnalytics(analyticsRes.data);
+        setAnalyticsCards(cardsDataRes.data);
+        setPwdAnalytics(pwdAnalyticsRes.data);
+        setResidencyAnalytics(residencyAnalyticsRes.data);
+      } catch (error) {
+        if (axios.isCancel(error)) {
+          console.log("Request canceled", error.message);
+        } else {
+          console.error("Error fetching data:", error);
+        }
+      }
+    };
+
+    fetchData();
+
+    return () => {
+      controller.abort();
+    };
+  }, [records, employees]);
 
   return (
     <Box
